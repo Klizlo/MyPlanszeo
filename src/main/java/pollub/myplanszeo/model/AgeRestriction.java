@@ -3,6 +3,9 @@ package pollub.myplanszeo.model;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+// Tydzień 2, Wzorzec Singleton
+// Wzorzec Singleton został zaimplementowany za pomocą typu wyliczeniowego
+// Typ wyliczeniowy przechowuje informacje o odpowiednim wieku, aby zagrać w grę
 @RequiredArgsConstructor
 @Getter
 public enum AgeRestriction {
@@ -13,3 +16,4 @@ public enum AgeRestriction {
 
     private final String age;
 }
+//Koniec, Tydzień 2, Wzorzec Singleton
