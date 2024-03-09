@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardGameList {
+public class BoardGameList implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,18 @@ public class BoardGameList {
             inverseJoinColumns = @JoinColumn(name = "board_game_id")
     )
     private Set<BoardGame> boardGames = new HashSet<>();
+
+    // Tydzień 2, Wzorzec Prototype 1
+    // Wzorzec pozwala na kopiowanie listy gier
+    // Dzięki temu można szybciej utworzyć nową listę gier na bazie już istniejącej
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Set<BoardGame> clonedBoardGames = new HashSet<>();
+        for(BoardGame boardGame: this.getBoardGames()) {
+            boardGame.getBoardGameLists().add(this);
+            clonedBoardGames.add(boardGame);
+        }
+        return new BoardGameList(null, this.name, this.description, clonedBoardGames);
+    }
+    //Koniec, Tydzień 2, Wzorzec Prototype 1
 }

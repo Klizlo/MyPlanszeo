@@ -2,7 +2,7 @@ package pollub.myplanszeo.dto;
 
 import pollub.myplanszeo.model.BoardGameList;
 
-//Tydzień 2, Wzorzec Factory
+//Tydzień 2, Wzorzec Factory 1
 // Wzorzec Factory służy do wybrania, który rodzaj listy gier należy zwrócić użytkownikowi
 // Klasa posiada wewnętrzny typ wyliczeniowy, który sprawia, że kod jest bardziej czytelny
 public class BoardGameListFactory {
@@ -30,3 +30,4 @@ public class BoardGameListFactory {
         Full;
     }
 }
+// Koniec, Tydzień 2, Wzorzec Factory 1
