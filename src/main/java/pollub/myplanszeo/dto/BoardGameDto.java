@@ -19,7 +19,7 @@ public class BoardGameDto {
     private Integer maxNumOfPlayers;
     private CategoryDto category;
 
-    public BoardGameDto(Builder builder) {
+    private BoardGameDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.ageRestriction = builder.ageRestriction;
