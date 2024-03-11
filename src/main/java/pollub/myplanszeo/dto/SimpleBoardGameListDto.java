@@ -2,6 +2,9 @@ package pollub.myplanszeo.dto;
 
 import lombok.Getter;
 
+//Tydzień 2, Wzorzec Builder 4
+// Wzorzec builder pozwala na wygodniejsze utworzenie obiektu klasy SimpleBoardGameListDto,
+// ponieważ nie trzeba pamiętać wszystkich argumentów, jakie należy podać do konstruktora
 @Getter
 public class SimpleBoardGameListDto extends BoardGameListDto {
 
@@ -37,3 +40,4 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
     }
 
 }
+//Koniec, Tydzień 2, Wzorzec Builder 4

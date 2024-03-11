@@ -1,9 +1,14 @@
 package pollub.myplanszeo.dto;
 
+import lombok.Getter;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.Set;
 
+//Tydzień 2, Wzorzec Builder 3
+// Wzorzec builder pozwala na wygodniejsze utworzenie obiektu klasy FullBoardGameListDto,
+// ponieważ nie trzeba pamiętać wszystkich argumentów, jakie należy podać do konstruktora
+@Getter
 public class FullBoardGameListDto extends BoardGameListDto {
 
     private Set<BoardGame> boardGames;
@@ -36,3 +41,4 @@ public class FullBoardGameListDto extends BoardGameListDto {
     }
 
 }
+//Koniec, Tydzień 2, Wzorzec Builder 3
