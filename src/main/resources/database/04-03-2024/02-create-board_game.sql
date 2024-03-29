@@ -9,6 +9,8 @@ create table `board_game` (
     producer varchar(50) not null,
     min_num_of_players numeric,
     max_num_of_players numeric,
+    base_game_id BIGINT null default null,
     category_id BIGINT NOT NULL,
+    CONSTRAINT board_game_fk FOREIGN KEY (base_game_id) references `board_game`(id),
     CONSTRAINT board_game_category_fk FOREIGN KEY (category_id) references `category`(id)
 );

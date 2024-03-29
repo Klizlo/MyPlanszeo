@@ -30,7 +30,7 @@ public class BuilderTest {
     @Test
     public void givenBoardGame_whenUseBoardGameDtoBuilder_returnBoardGameDto() {
         Category cooperative = new Category(2L, "Cooperative", new ArrayList<>());
-        BoardGame mansionOfMadness = new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null);
+        BoardGame mansionOfMadness = new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null, null, null);
 
         BoardGameDto boardGameDto = new BoardGameDto.Builder(mansionOfMadness.getId(), mansionOfMadness.getName(), mansionOfMadness.getProducer(), mansionOfMadness.getCategory())
                 .setAgeRestriction(mansionOfMadness.getAgeRestriction())
@@ -54,8 +54,8 @@ public class BuilderTest {
         Category cardGame = new Category(1L, "Card Game", new ArrayList<>());
         Category cooperative = new Category(2L, "Cooperative", new ArrayList<>());
         Set<BoardGame> boardGames = new HashSet<>();
-        boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, null));
-        boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null));
+        boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, null, null, null));
+        boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null, null, null));
 
         BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames);
 

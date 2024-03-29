@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,4 +37,11 @@ public class BoardGame {
 
     @ManyToMany(mappedBy = "boardGames")
     private Set<BoardGameList> boardGameLists = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "base_game_id")
+    private BoardGame baseGame;
+
+    @OneToMany(mappedBy = "baseGame")
+    private List<BoardGame> dlcs;
 }
