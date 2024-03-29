@@ -6,7 +6,7 @@ import pollub.myplanszeo.model.BoardGameList;
 
 import java.nio.charset.StandardCharsets;
 
-//Tydzień 2, Wzorzec Bridge 1
+//Tydzień 3, Wzorzec Bridge 1
 //Konkretyzacja implemnetatora
 //Klasa ta ma za zadnie przekonwertowanie listy gier na format JSON, a następnie zapisanie JSONa do tablicy bajtów.
 public class HttpJsonFileProcessor implements HttpFileProcessor{
@@ -20,4 +20,4 @@ public class HttpJsonFileProcessor implements HttpFileProcessor{
     }
 
 }
-//Koniec, Tydzień 2, Wzorzec Bridge 1
+//Koniec, Tydzień 3, Wzorzec Bridge 1

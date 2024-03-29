@@ -6,7 +6,7 @@ import pollub.myplanszeo.bridge.HttpFileBridger;
 import pollub.myplanszeo.bridge.HttpJsonFileProcessor;
 import pollub.myplanszeo.model.BoardGameList;
 
-//Tydzień 2, Wzorzec Adapter 1
+//Tydzień 3, Wzorzec Adapter 1
 //Klasa implementująca interfejs adaptera
 public class FileAdapterImpl implements FileAdapter {
 
@@ -22,4 +22,4 @@ public class FileAdapterImpl implements FileAdapter {
         return httpFileBridger.getData(boardGameList);
     }
 }
-//Koniec, Tydzień 2, Wzorzec Adapter 1
+//Koniec, Tydzień 3, Wzorzec Adapter 1
