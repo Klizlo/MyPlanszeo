@@ -1,4 +1,4 @@
-package pollub.myplanszeo.unit;
+package pollub.myplanszeo.unit.designPattern.structural;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

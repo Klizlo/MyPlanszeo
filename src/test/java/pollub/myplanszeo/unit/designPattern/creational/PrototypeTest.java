@@ -1,4 +1,4 @@
-package pollub.myplanszeo.unit;
+package pollub.myplanszeo.unit.designPattern.creational;
 
 import org.junit.jupiter.api.Test;
 import pollub.myplanszeo.model.AgeRestriction;
