@@ -1,10 +1,8 @@
 package pollub.myplanszeo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"boardGameLists", "baseGame", "dlcs"})
 public class BoardGame {
 
     @Id
@@ -35,13 +34,16 @@ public class BoardGame {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "boardGames")
     private Set<BoardGameList> boardGameLists = new HashSet<>();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "base_game_id")
     private BoardGame baseGame;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "baseGame")
     private List<BoardGame> dlcs;
 }
