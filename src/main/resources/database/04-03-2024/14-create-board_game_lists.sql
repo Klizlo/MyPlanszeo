@@ -1,5 +1,5 @@
 -- liquibase formatted sql
--- changeset Klizlo:4
+-- changeset Klizlo:5
 
 create table `board_game_lists`(
     board_game_id BIGINT,

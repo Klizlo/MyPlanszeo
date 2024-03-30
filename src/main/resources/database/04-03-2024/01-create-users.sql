@@ -1,7 +1,8 @@
 --liquibase formatted sql
 --changeset Klizlo:1
 
-create table `category` (
+create table `users` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name varchar(50) unique
+    email varchar(50) not null unique,
+    password varchar not null
 );

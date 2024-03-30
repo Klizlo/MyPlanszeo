@@ -1,5 +1,6 @@
 package pollub.myplanszeo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,6 +30,11 @@ public class BoardGameList implements Cloneable {
     )
     private Set<BoardGame> boardGames = new HashSet<>();
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
     // Tydzień 2, Wzorzec Prototype 1
     // Wzorzec pozwala na kopiowanie listy gier
     // Dzięki temu można szybciej utworzyć nową listę gier na bazie już istniejącej
@@ -39,7 +45,9 @@ public class BoardGameList implements Cloneable {
             boardGame.getBoardGameLists().add(this);
             clonedBoardGames.add(boardGame);
         }
-        return new BoardGameList(null, this.name, this.description, clonedBoardGames);
+        BoardGameList boardGameList = new BoardGameList(null, this.name, this.description, clonedBoardGames, user);
+        user.getBoardGameLists().add(boardGameList);
+        return boardGameList;
     }
     //Koniec, Tydzień 2, Wzorzec Prototype 1
 }
