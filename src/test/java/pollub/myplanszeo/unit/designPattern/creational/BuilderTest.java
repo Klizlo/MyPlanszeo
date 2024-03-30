@@ -2,10 +2,7 @@ package pollub.myplanszeo.unit.designPattern.creational;
 
 import org.junit.jupiter.api.Test;
 import pollub.myplanszeo.dto.*;
-import pollub.myplanszeo.model.AgeRestriction;
-import pollub.myplanszeo.model.BoardGame;
-import pollub.myplanszeo.model.BoardGameList;
-import pollub.myplanszeo.model.Category;
+import pollub.myplanszeo.model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +54,7 @@ public class BuilderTest {
         boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, null, null, null));
         boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null, null, null));
 
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames);
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames, new User(1L, "adam.nowak@poczta.pl", "AFabcabcbahucyba", null));
 
         SimpleBoardGameListDto simpleBoardGameList = new SimpleBoardGameListDto.Builder(boardGameList.getId(), boardGameList.getName(), boardGameList.getBoardGames().size())
                 .setDescription(boardGameList.getDescription())

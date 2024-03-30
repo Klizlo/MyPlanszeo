@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import pollub.myplanszeo.bridge.BoardGameListHttpFileBridge;
 import pollub.myplanszeo.bridge.HttpFileBridger;
 import pollub.myplanszeo.bridge.HttpJsonFileProcessor;
-import pollub.myplanszeo.model.AgeRestriction;
-import pollub.myplanszeo.model.BoardGame;
-import pollub.myplanszeo.model.BoardGameList;
-import pollub.myplanszeo.model.Category;
+import pollub.myplanszeo.model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class BridgeTest {
         boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, null, null, null));
         boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null, null, null));
 
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames);
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames, new User(1L, "adam.nowak@poczta.pl", "AFabcabcbahucyba", null));
 
         HttpFileBridger httpFileBridger = new BoardGameListHttpFileBridge(new HttpJsonFileProcessor());
         byte[] data = httpFileBridger.getData(boardGameList);

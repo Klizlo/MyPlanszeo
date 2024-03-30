@@ -1,6 +1,7 @@
 package pollub.myplanszeo.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.repository.BoardGameListRepository;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Qualifier("service")
 public class BoardGameListServiceImp implements BoardGameListService{
 
     private final BoardGameListRepository boardGameListRepository;
@@ -19,7 +21,7 @@ public class BoardGameListServiceImp implements BoardGameListService{
     }
 
     @Override
-    public BoardGameList getBoardGameListById(Long boardGameListId) {
+    public BoardGameList getBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {
         return boardGameListRepository.findById(boardGameListId)
                 .orElseThrow();
     }
