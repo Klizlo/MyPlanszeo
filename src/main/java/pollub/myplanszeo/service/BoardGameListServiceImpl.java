@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Qualifier("service")
-public class BoardGameListServiceImp implements BoardGameListService{
+public class BoardGameListServiceImpl implements BoardGameListService{
 
     private final BoardGameListRepository boardGameListRepository;
 

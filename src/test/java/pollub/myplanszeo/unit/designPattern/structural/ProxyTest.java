@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pollub.myplanszeo.model.*;
 import pollub.myplanszeo.proxy.BoardGameListServiceProxy;
-import pollub.myplanszeo.service.BoardGameListServiceImp;
+import pollub.myplanszeo.service.BoardGameListServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 public class ProxyTest {
 
     @Mock
-    private BoardGameListServiceImp boardGameListService;
+    private BoardGameListServiceImpl boardGameListService;
 
     @InjectMocks
     private BoardGameListServiceProxy boardGameListProxy;
