@@ -11,8 +11,6 @@ import java.util.List;
 //Tydzień 4, Wzorzec Proxy 1
 //Klasa ta ma za zadanie kontrolowania, czy upoważniony do tego użytkonik może przeglądać,
 //usuwać i manipulować odpowiednie listy gier planszowych
-@Component
-@Qualifier("proxy")
 public class BoardGameListServiceProxy implements BoardGameListService {
 
     private final BoardGameListService boardGameListService;

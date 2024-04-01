@@ -1,6 +1,7 @@
 package pollub.myplanszeo.adapter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.stereotype.Component;
 import pollub.myplanszeo.bridge.BoardGameListHttpFileBridge;
 import pollub.myplanszeo.bridge.HttpFileBridger;
 import pollub.myplanszeo.bridge.HttpJsonFileProcessor;

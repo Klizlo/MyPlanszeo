@@ -7,8 +7,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public UserDetailsServiceDecoratorBeanProcessor beanProcessor() {
+    public UserDetailsServiceDecoratorBeanProcessor userDetailsServiceDecoratorBeanProcessor() {
         return new UserDetailsServiceDecoratorBeanProcessor();
+    }
+
+    @Bean
+    public BoardGameListServiceBeanProcessor boardGameListServiceBeanProcessor() {
+        return new BoardGameListServiceBeanProcessor();
     }
 
 }

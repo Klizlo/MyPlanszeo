@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Qualifier("service")
 public class BoardGameListServiceImpl implements BoardGameListService{
 
     private final BoardGameListRepository boardGameListRepository;
