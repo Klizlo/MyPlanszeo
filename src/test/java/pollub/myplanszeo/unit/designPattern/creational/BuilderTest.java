@@ -29,14 +29,14 @@ public class BuilderTest {
         Category cooperative = new Category(2L, "Cooperative", new ArrayList<>());
         BoardGame mansionOfMadness = new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, null, null, null);
 
-        BoardGameDto boardGameDto = new BoardGameDto.Builder(mansionOfMadness.getId(), mansionOfMadness.getName(), mansionOfMadness.getProducer(), mansionOfMadness.getCategory())
+        SimpleBoardGameDto boardGameDto = new SimpleBoardGameDto.Builder(mansionOfMadness.getId(), mansionOfMadness.getName(), mansionOfMadness.getProducer(), mansionOfMadness.getCategory())
                 .setAgeRestriction(mansionOfMadness.getAgeRestriction())
                 .setDescription(mansionOfMadness.getDescription())
                 .setMinNumOfPlayers(mansionOfMadness.getMinNumOfPlayers())
                 .setMaxNumOfPlayers(mansionOfMadness.getMaxNumOfPlayers())
                 .build();
 
-        assertInstanceOf(BoardGameDto.class,                        boardGameDto);
+        assertInstanceOf(SimpleBoardGameDto.class,                        boardGameDto);
         assertEquals(mansionOfMadness.getId(),                      boardGameDto.getId());
         assertEquals(mansionOfMadness.getName(),                    boardGameDto.getName());
         assertEquals(mansionOfMadness.getProducer(),                boardGameDto.getProducer());
