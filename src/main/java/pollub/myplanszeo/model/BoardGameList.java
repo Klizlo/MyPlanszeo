@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Entity
@@ -34,6 +35,10 @@ public class BoardGameList implements Cloneable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+
+    public Iterator<BoardGame> iterator() {
+        return new BoardGameIterator(boardGames.stream().toList());
+    }
 
     // Tydzień 2, Wzorzec Prototype 1
     // Wzorzec pozwala na kopiowanie listy gier

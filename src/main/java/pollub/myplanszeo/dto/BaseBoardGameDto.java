@@ -3,9 +3,11 @@ package pollub.myplanszeo.dto;
 import lombok.Getter;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.BoardGame;
+import pollub.myplanszeo.model.BoardGameIterator;
 import pollub.myplanszeo.model.Category;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //Tydzień 3, Wzorzec Composite 1
@@ -53,7 +55,9 @@ public class BaseBoardGameDto extends BoardGameDto{
                     .build();
             if (expansions != null) {
                 this.expansions = new ArrayList<>();
-                for (BoardGame expansion : expansions) {
+                Iterator<BoardGame> iterator = new BoardGameIterator(expansions);
+                while (iterator.hasNext()) {
+                    BoardGame expansion = iterator.next();
                     this.expansions.add(
                             new SimpleBoardGameDto.Builder(expansion.getId(), expansion.getName(), expansion.getProducer(), expansion.getCategory())
                             .setAgeRestriction(expansion.getAgeRestriction())
