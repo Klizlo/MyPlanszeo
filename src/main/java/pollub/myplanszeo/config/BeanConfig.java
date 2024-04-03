@@ -11,9 +11,4 @@ public class BeanConfig {
         return new UserDetailsServiceDecoratorBeanProcessor();
     }
 
-    @Bean
-    public BoardGameListServiceBeanProcessor boardGameListServiceBeanProcessor() {
-        return new BoardGameListServiceBeanProcessor();
-    }
-
 }
