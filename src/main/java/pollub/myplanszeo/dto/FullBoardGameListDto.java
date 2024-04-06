@@ -1,6 +1,7 @@
 package pollub.myplanszeo.dto;
 
 import lombok.Getter;
+import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.Set;
@@ -16,6 +17,17 @@ public class FullBoardGameListDto extends BoardGameListDto {
     private FullBoardGameListDto(Builder builder) {
         super(builder.id, builder.name, builder.description);
         this.boardGames = builder.boardGames;
+    }
+
+    public BoardGameListDtoMemento saveToMemento() {
+        return new BoardGameListDtoMemento(this.getId(), this.getName(), this.getDescription(), this.getBoardGames());
+    }
+
+    public void undoFromMemento(BoardGameListDtoMemento memento) {
+        this.setId(memento.getId());
+        this.setName(memento.getName());
+        this.setDescription(memento.getDescription());
+        this.boardGames = memento.getBoardGames();
     }
 
     public static class Builder {

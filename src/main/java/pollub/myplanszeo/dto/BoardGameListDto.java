@@ -1,8 +1,11 @@
 package pollub.myplanszeo.dto;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter(AccessLevel.PROTECTED)
 public abstract class BoardGameListDto {
 
     private Long id;
