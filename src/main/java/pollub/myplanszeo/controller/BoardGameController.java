@@ -1,5 +1,6 @@
 package pollub.myplanszeo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import pollub.myplanszeo.dto.BaseBoardGameDto;
 import pollub.myplanszeo.dto.BoardGameDto;
 import pollub.myplanszeo.dto.SimpleBoardGameDto;
+import pollub.myplanszeo.interpreter.BoardGameInterpreter;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameIterator;
 import pollub.myplanszeo.service.BoardGameService;
@@ -25,19 +27,22 @@ public class BoardGameController {
     private final BoardGameService boardGameService;
 
     @GetMapping("/boardgames")
-    public String getAllBoardGames(Model model) {
-        List<BoardGameDto> boardGames = new ArrayList<>();
-        BoardGameIterator iterator = new BoardGameIterator(boardGameService.getAllBoardGames());
+    public String getAllBoardGames(HttpServletRequest request, Model model) {
+        String params = request.getQueryString() == null ? "" : request.getQueryString();
+        List<BoardGameDto> boardGameDtos = new ArrayList<>();
+        List<BoardGame> boardGames = boardGameService.getAllBoardGames();
+        BoardGameInterpreter interpreter = new BoardGameInterpreter(boardGames);
+        BoardGameIterator iterator = new BoardGameIterator(interpreter.interpret(params));
         while (iterator.hasNext()) {
             BoardGame game = iterator.next();
-            boardGames.add(new SimpleBoardGameDto.Builder(game.getId(), game.getName(), game.getProducer(), game.getCategory())
+            boardGameDtos.add(new SimpleBoardGameDto.Builder(game.getId(), game.getName(), game.getProducer(), game.getCategory())
                     .setAgeRestriction(game.getAgeRestriction())
                     .setDescription(game.getDescription())
                     .setMinNumOfPlayers(game.getMinNumOfPlayers())
                     .setMaxNumOfPlayers(game.getMaxNumOfPlayers())
                     .build());
         }
-        model.addAttribute("games", boardGames);
+        model.addAttribute("games", boardGameDtos);
         return "boardgames";
     }
 
