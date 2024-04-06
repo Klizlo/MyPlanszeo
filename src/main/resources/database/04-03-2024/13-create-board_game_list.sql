@@ -1,5 +1,5 @@
 -- liquibase formatted sql
--- changeset Klizlo:4
+-- changeset Klizlo:13
 
 create table `board_game_list` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

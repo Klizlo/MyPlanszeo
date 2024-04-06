@@ -1,8 +1,10 @@
 package pollub.myplanszeo.config;
 
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,8 +38,13 @@ public class SecurityConfig {
         httpSecurity.authenticationProvider(authenticationProvider());
 
         httpSecurity
-                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
-                .formLogin(login -> login.usernameParameter("email")
+                .authorizeHttpRequests(request -> request
+                                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/boardgames/**").permitAll()
+                                .anyRequest().authenticated()
+                        )
+                .formLogin(login -> login
+                        .usernameParameter("email")
                         .defaultSuccessUrl("/")
                         .permitAll())
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll());

@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset Klizlo:1
+--changeset Klizlo:01
 
 create table `users` (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
