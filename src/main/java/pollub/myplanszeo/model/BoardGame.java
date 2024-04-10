@@ -44,6 +44,6 @@ public class BoardGame {
     private BoardGame baseGame;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "baseGame")
+    @OneToMany(mappedBy = "baseGame", fetch = FetchType.EAGER)
     private List<BoardGame> dlcs;
 }

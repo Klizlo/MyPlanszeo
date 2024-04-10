@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+    <a class="navbar-brand" href="#">MyPlanszeo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/boardgames}">Games</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/boardgamelists}">My list</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                </div>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link" th:href="@{/login}">Sing in</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link" th:href="@{/register}">Sing up</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

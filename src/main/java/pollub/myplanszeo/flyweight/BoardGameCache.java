@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BoardGameCache {
 
-    private BoardGameService boardGameService;
+    private final BoardGameService boardGameService;
     private static final Map<Long, BoardGame> longBoardGames = new HashMap<>();
 
     public List<BoardGame> getAllBoardGames() {
