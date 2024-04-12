@@ -2,8 +2,11 @@ package pollub.myplanszeo.command.boardgamelist;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.repository.BoardGameListRepository;
+
+import java.util.List;
 
 
 //Tydzień 2, Wzorzec Factory 2
@@ -25,6 +28,12 @@ public class BoardGameListCommandFactory {
             }
             case ADD_BOARD_GAME_LIST -> {
                 return new AddBoardGameListCommand(boardGameListRepository, (BoardGameList) params[0]);
+            }
+            case ADD_BOARD_GAME_TO_LISTS -> {
+                return new AddBoardGameToBoardGameLists(boardGameListRepository, (List<BoardGameList>) params[0], (BoardGame) params[1]);
+            }
+            case REMOVE_BOARD_GAME_FROM_LISTS -> {
+                return new RemoveBoardGameFromBoardGameLists(boardGameListRepository, (List<BoardGameList>) params[0], (BoardGame) params[1]);
             }
             case CHECK_BOARD_GAME_LIST -> {
                 return new CheckBoardGameListCommand(boardGameListRepository, (Long) params[0], (Long) params[1]);

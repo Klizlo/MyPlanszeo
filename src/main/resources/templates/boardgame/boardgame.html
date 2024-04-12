@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${game.getName()}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div th:replace="fragments/header :: header" ></div>
+    <div class="container">
+        <h1 th:text="${game.getName()}" />
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Producer</td>
+                        <td th:text="${game.getProducer()}"/>
+                    </tr>
+                    <tr>
+                        <td>Age restriction</td>
+                        <td th:text="${game.getAgeRestriction().getAge()}"/>
+                    </tr>
+                    <tr>
+                        <td>Number of players</td>
+                        <td th:text="${game.getMinNumOfPlayers() + '-' + game.getMaxNumOfPlayers()}"/>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td th:text="${game.getCategory().getName()}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="col-sm-4 text-center">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#boardGameLists">
+                        <span class="material-icons">add</span> Add to list
+                    </button>
+                </div>
+                <div id="boardGameLists" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Choose lists</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" th:action="@{/boardgamelists/add_game/{gameId}(gameId=${game.getId()})}">
+                                    <th:block th:each="list: ${lists}">
+                                        <div class="form-check">
+                                            <input  class="form-check-input" type="checkbox" th:id="${list.id}" name="lists" th:value="${list.getId()}" th:checked="${listsWithGivenGame.contains(list.id)}">
+                                            <label class="form-check-label" th:for="${list.id}" th:text="${list.name}"/>
+                                        </div>
+                                    </th:block>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div>
+            <h3>Description</h3>
+            <div th:if="${game.getDescription() == '' || game.getDescription() == null}">
+                <p>No description</p>
+            </div>
+            <div th:unless="${game.getDescription() == '' || game.getDescription() == null}">
+                <p th:text="${game.description}"/>
+            </div>
+        </div>
+        <div>
+            <h3>Expansions</h3>
+            <div th:if="${game.getExpansions().size() == 0}">
+                No expansions
+            </div>
+            <div th:unless="${game.getExpansions().size() == 0}">
+                <table>
+                    <tbody th:each="dlc: ${game.getExpansions()}">
+                        <tr>
+                            <td th:text="${dlc.getName()}"/>
+                            <td><a th:href="@{/boardgames/{id}(id=${dlc.getId()})}">Show</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"boardGameLists", "baseGame", "dlcs"})
+@EqualsAndHashCode(exclude = {"category", "boardGameLists", "baseGame", "dlcs"})
 public class BoardGame {
 
     @Id
@@ -35,7 +36,7 @@ public class BoardGame {
     private Category category;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "boardGames")
+    @ManyToMany(mappedBy = "boardGames", fetch = FetchType.EAGER)
     private Set<BoardGameList> boardGameLists = new HashSet<>();
 
     @JsonIgnore

@@ -2,17 +2,19 @@ package pollub.myplanszeo.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import pollub.myplanszeo.dto.mapper.BaseBoardGameDtoMapper;
-import pollub.myplanszeo.dto.mapper.BoardGameMapper;
-import pollub.myplanszeo.dto.mapper.CategoryMapper;
-import pollub.myplanszeo.dto.mapper.SimpleBoardGameMapper;
+import pollub.myplanszeo.config.security.CustomUserDetails;
+import pollub.myplanszeo.dto.BoardGameListFactory;
+import pollub.myplanszeo.dto.mapper.*;
+import pollub.myplanszeo.facade.BoardGameListFacade;
 import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.interpreter.BoardGameInterpreter;
 import pollub.myplanszeo.model.BoardGame;
+import pollub.myplanszeo.model.BoardGameList;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class BoardGameController {
 
     private final BoardGameCache boardGameCache;
     private BoardGameMapper boardGameMapper;
+    private final BoardGameListFacade boardGameListFacade;
 
     @GetMapping("/boardgames")
     public String getAllBoardGames(HttpServletRequest request, Model model) {
@@ -42,16 +45,35 @@ public class BoardGameController {
                 .map(BoardGame::getProducer)
                 .distinct()
                 .toList());
-        return "boardgames";
+        return "boardgame/boardgames";
     }
 
     @GetMapping("/boardgames/{id}")
-    public String getBoardGameById(@PathVariable("id") Long id, Model model) {
+    public String getBoardGameById(@PathVariable("id") Long id, Model model, Authentication authentication) {
         BoardGame boardGame = boardGameCache.getBoardGameById(id);
         boardGameMapper = new BaseBoardGameDtoMapper();
         model.addAttribute("game", boardGameMapper.mapToDto(boardGame));
 
-        return "boardgame";
+        if (authentication != null && authentication.isAuthenticated()) {
+            getUserBoardGameListsWhenIsAuthenticated(id, model, authentication);
+        }
+
+        return "boardgame/boardgame";
+    }
+
+    private void getUserBoardGameListsWhenIsAuthenticated(Long id, Model model, Authentication authentication) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        List<BoardGameList> boardGameLists = boardGameListFacade.getAllBoardGameListsByUserId(principal.getId());
+        model.addAttribute("lists", BoardGameListMapper.mapToDtos(boardGameLists, BoardGameListFactory.BoardGameListType.Simple));
+        List<Long> listsWithGivenGame = boardGameLists.stream()
+                .filter(boardGameList -> boardGameList.getBoardGames()
+                        .stream()
+                        .map(BoardGame::getId)
+                        .anyMatch(gameId -> gameId.equals(id)))
+                .map(BoardGameList::getId)
+                .toList();
+        model.addAttribute("listsWithGivenGame", listsWithGivenGame);
+
     }
 
 }

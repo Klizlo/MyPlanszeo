@@ -17,14 +17,14 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        return "signup_form";
+        return "auth/signup_form";
     }
 
     @PostMapping("/register")
     public String processRegister(User user) {
         System.out.println(user);
         userService.addUser(user);
-        return "signup_success";
+        return "auth/signup_success";
     }
 
 

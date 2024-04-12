@@ -13,8 +13,8 @@ public interface BoardGameListFacade {
 
     List<BoardGameList> getAllBoardGameListsByUserId(Long userId);
     BoardGameList getBoardGameListByIdAndUserId(Long boardGameListId, Long userId);
-    BoardGameList addBoardGameList(BoardGameList boardGameList);
+    BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId);
+    void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long id);
     byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType) throws JsonProcessingException;
-
 }
 //Koniec, Tydzień 4, Wzorzec Facade 1

@@ -13,7 +13,7 @@ public class BoardGameListServiceBeanProcessor implements BeanPostProcessor {
             return bean;
         }
 
-        if (bean instanceof BoardGameListService) {
+        if (bean instanceof BoardGameListServiceProxy) {
             return bean;
         }
 

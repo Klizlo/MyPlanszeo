@@ -1,11 +1,10 @@
 package pollub.myplanszeo.proxy;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import pollub.myplanszeo.exception.UnauthorizedException;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.BoardGameListService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Tydzień 4, Wzorzec Proxy 1
@@ -15,7 +14,7 @@ public class BoardGameListServiceProxy implements BoardGameListService {
 
     private final BoardGameListService boardGameListService;
 
-    public BoardGameListServiceProxy(@Qualifier("service")BoardGameListService boardGameListService) {
+    public BoardGameListServiceProxy(BoardGameListService boardGameListService) {
         this.boardGameListService = boardGameListService;
     }
 
@@ -33,8 +32,16 @@ public class BoardGameListServiceProxy implements BoardGameListService {
     }
 
     @Override
-    public BoardGameList addBoardGameList(BoardGameList boardGameList) {
-        return null;
+    public BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId) {
+        return boardGameListService.addBoardGameList(boardGameList, userId);
+    }
+
+    @Override
+    public void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
+        if (selected == null) {
+            selected = new ArrayList<Long>();
+        }
+        boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
     }
 
     @Override

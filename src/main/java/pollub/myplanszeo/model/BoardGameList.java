@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(exclude = {"boardGames", "user"})
 public class BoardGameList implements Cloneable {
 
     @Id
@@ -23,7 +24,7 @@ public class BoardGameList implements Cloneable {
     private String name;
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "board_game_lists",
             joinColumns = @JoinColumn(name = "board_game_list_id"),

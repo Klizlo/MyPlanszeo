@@ -12,6 +12,8 @@ public interface BoardGameListCommand {
         FIND_BOARD_GAME_LISTS,
         FIND_BOARD_GAME_LIST,
         ADD_BOARD_GAME_LIST,
+        ADD_BOARD_GAME_TO_LISTS,
+        REMOVE_BOARD_GAME_FROM_LISTS,
         CHECK_BOARD_GAME_LIST
     }
 

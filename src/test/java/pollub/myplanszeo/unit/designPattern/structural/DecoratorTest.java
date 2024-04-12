@@ -1,7 +1,6 @@
 package pollub.myplanszeo.unit.designPattern.structural;
 
 
-import org.apache.logging.slf4j.SLF4JLogger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +14,11 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.config.test.MemoryLogger;
 import pollub.myplanszeo.model.User;
-import pollub.myplanszeo.service.LoggingUserDetailsService;
+import pollub.myplanszeo.service.LoggingUserService;
+import pollub.myplanszeo.service.UserService;
 
 import java.util.ArrayList;
 
@@ -30,10 +29,10 @@ import static org.mockito.Mockito.when;
 public class DecoratorTest {
 
     @Mock
-    private UserDetailsService userService;
+    private UserService userService;
 
     @InjectMocks
-    private LoggingUserDetailsService userDetailsService;
+    private LoggingUserService loggingUserService;
 
     private static MemoryLogger memoryLogger;
 
@@ -42,7 +41,7 @@ public class DecoratorTest {
         Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         memoryLogger = new MemoryLogger();
         memoryLogger.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
-        logger.setLevel(Level.WARN);
+        logger.setLevel(Level.INFO);
         logger.addAppender(memoryLogger);
         memoryLogger.start();
     }
@@ -54,17 +53,15 @@ public class DecoratorTest {
     }
 
     @Test
-    public void givenEmail_whenLoadUserByUsername_DisplayLog() {
+    public void givenUser_whenAddUser_DisplayLog() {
 
         User user = new User(1L, "adam.nowak@poczta.pl", "Asy827b%e36uq@", null);
-        UserDetails userDetails = new CustomUserDetails(user.getId(), user.getEmail(), user.getPassword(), new ArrayList<>());
 
-        when(userService.loadUserByUsername("adam.nowak@poczta.pl"))
-                .thenReturn(userDetails);
+        when(userService.addUser(user)).thenReturn(user);
 
-        userDetailsService.loadUserByUsername("adam.nowak@poczta.pl");
+        loggingUserService.addUser(user);
 
-        assertThat(memoryLogger.search("User " + user.getEmail() + " log in", Level.WARN).size()).isEqualTo(1);
+        assertThat(memoryLogger.search("User with email " + user.getEmail() + " was added", Level.INFO).size()).isEqualTo(1);
 
     }
 

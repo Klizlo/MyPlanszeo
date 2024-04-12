@@ -5,23 +5,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import pollub.myplanszeo.model.User;
 
 
 //Tydzień 3, Wzorzec Decorator 1
 //Klasa ta ma za zadanie logowanie czy użytkownik poprawnie zalogował się do serwisu
 @RequiredArgsConstructor
 @Slf4j
-public class LoggingUserDetailsService implements UserDetailsService {
+public class LoggingUserService implements UserService {
 
-    private final UserDetailsService userDetailsService;
-
+    private final UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        log.warn("User {} log in", userDetails.getUsername());
+    public User getUserById(Long userId) {
+        return userService.getUserById(userId);
+    }
 
-        return userDetails;
+    @Override
+    public User addUser(User user) {
+        User added = userService.addUser(user);
+        log.info("User with email {} was added", user.getEmail());
+        return added;
     }
 }
 //Koniec, Tydzień 3, Wzorzec Decorator
