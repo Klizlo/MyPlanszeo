@@ -22,9 +22,8 @@
                 <input type="text" hidden th:field="*{id}">
                 <input type="text" hidden th:field="*{name}">
                 <input type="text" hidden th:field="*{description}">
-                <input type="text" th:value="${list.boardGames.size()}">
                 <th:block th:each="boardGame: ${list.boardGames}">
-                    <input type="checkbox" checked th:field="*{boardGames}" th:value="${boardGame.id}">
+                    <input type="checkbox" hidden checked th:field="*{boardGames}" th:value="${boardGame.id}">
                 </th:block>
                 <button type="submit" class="btn btn-light">Undo changes</button>
             </form>
@@ -58,9 +57,11 @@
                                 <span class="material-icons">edit</span>
                             </button>
                         </a>
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Copy">
-                            <span class="material-icons">content_copy</span>
-                        </button>
+                        <a th:href="@{/boardgamelists/{id}/copy(id = ${list.getId()})}">
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </a>
                         <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
                             <span class="material-icons">delete</span>
                         </button>
@@ -72,10 +73,10 @@
     </div>
 </body>
 <script>
-    // $(document).ready(function() {
-    //     setTimeout(function() {
-    //         $(".alert").alert('close');
-    //     }, 5000);
-    // });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 5000);
+    });
 </script>
 </html>

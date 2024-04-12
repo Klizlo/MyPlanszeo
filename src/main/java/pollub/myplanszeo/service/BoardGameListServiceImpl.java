@@ -69,8 +69,6 @@ public class BoardGameListServiceImpl implements BoardGameListService{
 
     @Override
     public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
-        System.out.println(boardGameListToEdit.getBoardGames().size());
-        System.out.println(boardGameList.getBoardGames().size());
         if (boardGameList.getBoardGames() != null && boardGameList.getBoardGames().size() > boardGameListToEdit.getBoardGames().size()) {
             List<BoardGame> boardGames = boardGameList.getBoardGames().stream()
                     .filter(boardGame -> !boardGameListToEdit.getBoardGames().contains(boardGame))
@@ -80,7 +78,6 @@ public class BoardGameListServiceImpl implements BoardGameListService{
                 boardGame.getBoardGameLists().add(boardGameListToEdit);
                 boardGameListToEdit.getBoardGames().add(boardGame);
             }
-            System.out.println("84: " + boardGames.size());
         } else if(boardGameList.getBoardGames() != null && boardGameList.getBoardGames().size() < boardGameListToEdit.getBoardGames().size()) {
             List<BoardGame> boardGames = boardGameListToEdit.getBoardGames().stream()
                     .filter(boardGame -> boardGameList.getBoardGames().stream().map(BoardGame::getId).noneMatch(id -> boardGame.getId().equals(id)))
@@ -89,7 +86,6 @@ public class BoardGameListServiceImpl implements BoardGameListService{
                 boardGame.getBoardGameLists().remove(boardGameListToEdit);
                 boardGameListToEdit.getBoardGames().remove(boardGame);
             }
-            System.out.println("93: " + boardGames.size());
         }
         return (BoardGameList) commandFactory
                 .create(BoardGameListCommand.CommandType.EDIT_BOARD_GAME_LIST, boardGameListToEdit, boardGameList)

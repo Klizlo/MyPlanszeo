@@ -119,4 +119,21 @@ public class BoardGameListController {
         return "redirect:/boardgamelists";
     }
 
+    @GetMapping("/boardgamelists/{id}/copy")
+    public String getCopyBoardGameListForm(@PathVariable Long id, Model model, Authentication authentication) throws CloneNotSupportedException {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
+        model.addAttribute("list", boardGameList.clone());
+
+        return "boardgamelist/copy_boardgamelist_form";
+    }
+
+    @PostMapping("/boardgamelists/copy")
+    public String copyBoardGameList(@ModelAttribute("list") BoardGameList boardGameList, Authentication authentication) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        boardGameListFacade.addBoardGameList(boardGameList, principal.getId());
+
+        return "redirect:/boardgamelists";
+    }
+
 }

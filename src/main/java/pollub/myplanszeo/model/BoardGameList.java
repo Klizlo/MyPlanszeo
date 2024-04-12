@@ -45,7 +45,7 @@ public class BoardGameList implements Cloneable {
     // Wzorzec pozwala na kopiowanie listy gier
     // Dzięki temu można szybciej utworzyć nową listę gier na bazie już istniejącej
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public BoardGameList clone() throws CloneNotSupportedException {
         Set<BoardGame> clonedBoardGames = new HashSet<>();
         for(BoardGame boardGame: this.getBoardGames()) {
             boardGame.getBoardGameLists().add(this);
