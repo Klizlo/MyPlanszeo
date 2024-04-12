@@ -16,6 +16,22 @@
     <div class="container">
         <h1>Your Lists</h1>
         <a role="button" class="btn btn-primary" th:href="@{/boardgamelists/add}"><span class="material-icons">add</span> Add</a>
+        <div th:if="${caretaker != null && caretaker.mementoSize() > 0}" class="alert alert-warning alert-dismissible fade show" role="alert">
+            Changes was saved
+            <form method="post" th:action="@{/boardgamelists/undo}" th:object="${memento}">
+                <input type="text" hidden th:field="*{id}">
+                <input type="text" hidden th:field="*{name}">
+                <input type="text" hidden th:field="*{description}">
+                <input type="text" th:value="${list.boardGames.size()}">
+                <th:block th:each="boardGame: ${list.boardGames}">
+                    <input type="checkbox" checked th:field="*{boardGames}" th:value="${boardGame.id}">
+                </th:block>
+                <button type="submit" class="btn btn-light">Undo changes</button>
+            </form>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <table class="table table-hover">
             <thead class="thead-dark">
             <tr>
@@ -37,9 +53,11 @@
                                 <span class="material-icons">info</span>
                             </button>
                         </a>
-                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
-                            <span class="material-icons">edit</span>
-                        </button>
+                        <a th:href="@{/boardgamelists/{id}/edit(id = ${list.getId()})}">
+                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <span class="material-icons">edit</span>
+                            </button>
+                        </a>
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Copy">
                             <span class="material-icons">content_copy</span>
                         </button>
@@ -53,4 +71,11 @@
         </table>
     </div>
 </body>
+<script>
+    // $(document).ready(function() {
+    //     setTimeout(function() {
+    //         $(".alert").alert('close');
+    //     }, 5000);
+    // });
+</script>
 </html>

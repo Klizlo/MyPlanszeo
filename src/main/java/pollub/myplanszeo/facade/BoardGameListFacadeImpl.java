@@ -3,6 +3,8 @@ package pollub.myplanszeo.facade;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.BoardGameListService;
 import pollub.myplanszeo.service.FileService;
@@ -34,6 +36,11 @@ public class BoardGameListFacadeImpl implements BoardGameListFacade {
     @Override
     public void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
         boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
+    }
+
+    @Override
+    public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
+        return boardGameListService.editBoardGameList(boardGameListToEdit, boardGameList);
     }
 
     @Override

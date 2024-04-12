@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.dto.BoardGameListDto;
 import pollub.myplanszeo.dto.BoardGameListFactory;
+import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.dto.mapper.BoardGameListMapper;
 import pollub.myplanszeo.facade.BoardGameListFacade;
 import pollub.myplanszeo.flyweight.BoardGameCache;
+import pollub.myplanszeo.memento.BoardGameListCaretaker;
+import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGameList;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -63,7 +67,6 @@ public class BoardGameListController {
 
     @PostMapping("/boardgamelists/process_add")
     public String processAddBoardGameListForm(@ModelAttribute("list") BoardGameList boardGameList, Authentication authentication) {
-        System.out.println(boardGameList);
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         boardGameListFacade.addBoardGameList(boardGameList, principal.getId());
 
@@ -76,4 +79,44 @@ public class BoardGameListController {
         boardGameListFacade.modifyBoardGameInBoardGameLists(gameId, selected, principal.getId());
         return "redirect:" + request.getHeader("Referer");
     }
+
+    @GetMapping("/boardgamelists/{id}/edit")
+    public String getUpdateBoardGameListForm(@PathVariable Long id, Model model, Authentication authentication) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
+        model.addAttribute("list", (FullBoardGameListDto) BoardGameListMapper.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
+
+        return "boardgamelist/update_boardgamelist_form";
+    }
+
+    @PostMapping("/boardgamelists/{id}/edit")
+    public String updateBoardGameList(@PathVariable Long id, Model model, @ModelAttribute("list") FullBoardGameListDto boardGameList, Authentication authentication) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        BoardGameListCaretaker boardGameListCaretaker = new BoardGameListCaretaker();
+        BoardGameList boardGameListToEdit = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
+        boardGameListCaretaker.addMemento(((FullBoardGameListDto)BoardGameListMapper.mapToDto(boardGameListToEdit, BoardGameListFactory.BoardGameListType.Full)).saveToMemento());
+        model.addAttribute("caretaker", boardGameListCaretaker);
+        BoardGameListDtoMemento lastMemento = boardGameListCaretaker.getLastMemento();
+        model.addAttribute("memento", lastMemento);
+
+        boardGameListFacade.editBoardGameList(boardGameListToEdit, boardGameList);
+
+        model.addAttribute("lists", BoardGameListMapper
+                .mapToDtos(boardGameListFacade.getAllBoardGameListsByUserId(principal.getId()),
+                        BoardGameListFactory.BoardGameListType.Simple));
+        return "boardgamelist/boardgamelists";
+    }
+
+    @PostMapping("/boardgamelists/undo")
+    public String undoBoardGameListChanges(@ModelAttribute("memento") BoardGameListDtoMemento boardGameListDtoMemento, Authentication authentication) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        FullBoardGameListDto boardGameListDto = new FullBoardGameListDto.Builder(null, null, new HashSet<>()).build();
+        boardGameListDto.undoFromMemento(boardGameListDtoMemento);
+        System.out.println(boardGameListDtoMemento.getBoardGames().size());
+        BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(boardGameListDto.getId(), principal.getId());
+        boardGameListFacade.editBoardGameList(boardGameList, boardGameListDto);
+
+        return "redirect:/boardgamelists";
+    }
+
 }

@@ -3,12 +3,13 @@ package pollub.myplanszeo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
+import pollub.myplanszeo.dto.BoardGameDto;
+import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BoardGameListServiceImpl implements BoardGameListService{
@@ -54,17 +55,44 @@ public class BoardGameListServiceImpl implements BoardGameListService{
                 .filter(boardGameList -> selected.contains(boardGameList.getId())
                         && !boardGameList.getBoardGames().contains(boardGame))
                 .toList();
-        System.out.println(boardGameListsToAddGame.size());
-        gameLists.forEach(boardGameList -> System.out.println(boardGameList.getBoardGames().size()));
 
         List<BoardGameList> boardGameListsToRemoveGame = gameLists.stream()
                 .filter(boardGameList -> boardGameList.getBoardGames().contains(boardGame))
                 .toList();
-        System.out.println(boardGameListsToRemoveGame.size());
+
         commandFactory
                 .create(BoardGameListCommand.CommandType.ADD_BOARD_GAME_TO_LISTS, boardGameListsToAddGame, boardGame)
                 .execute();
         commandFactory.create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_FROM_LISTS, boardGameListsToRemoveGame, boardGame)
+                .execute();
+    }
+
+    @Override
+    public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
+        System.out.println(boardGameListToEdit.getBoardGames().size());
+        System.out.println(boardGameList.getBoardGames().size());
+        if (boardGameList.getBoardGames() != null && boardGameList.getBoardGames().size() > boardGameListToEdit.getBoardGames().size()) {
+            List<BoardGame> boardGames = boardGameList.getBoardGames().stream()
+                    .filter(boardGame -> !boardGameListToEdit.getBoardGames().contains(boardGame))
+                    .map(boardGame -> boardGameCache.getBoardGameById(boardGame.getId()))
+                    .toList();
+            for (BoardGame boardGame: boardGames) {
+                boardGame.getBoardGameLists().add(boardGameListToEdit);
+                boardGameListToEdit.getBoardGames().add(boardGame);
+            }
+            System.out.println("84: " + boardGames.size());
+        } else if(boardGameList.getBoardGames() != null && boardGameList.getBoardGames().size() < boardGameListToEdit.getBoardGames().size()) {
+            List<BoardGame> boardGames = boardGameListToEdit.getBoardGames().stream()
+                    .filter(boardGame -> boardGameList.getBoardGames().stream().map(BoardGame::getId).noneMatch(id -> boardGame.getId().equals(id)))
+                    .toList();
+            for (BoardGame boardGame: boardGames) {
+                boardGame.getBoardGameLists().remove(boardGameListToEdit);
+                boardGameListToEdit.getBoardGames().remove(boardGame);
+            }
+            System.out.println("93: " + boardGames.size());
+        }
+        return (BoardGameList) commandFactory
+                .create(BoardGameListCommand.CommandType.EDIT_BOARD_GAME_LIST, boardGameListToEdit, boardGameList)
                 .execute();
     }
 

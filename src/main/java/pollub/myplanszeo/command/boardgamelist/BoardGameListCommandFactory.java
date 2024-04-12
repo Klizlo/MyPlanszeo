@@ -2,6 +2,7 @@ package pollub.myplanszeo.command.boardgamelist;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.repository.BoardGameListRepository;
@@ -28,6 +29,9 @@ public class BoardGameListCommandFactory {
             }
             case ADD_BOARD_GAME_LIST -> {
                 return new AddBoardGameListCommand(boardGameListRepository, (BoardGameList) params[0]);
+            }
+            case EDIT_BOARD_GAME_LIST -> {
+                return new EditBoardGameListCommand(boardGameListRepository, (BoardGameList) params[0], (FullBoardGameListDto) params[1]);
             }
             case ADD_BOARD_GAME_TO_LISTS -> {
                 return new AddBoardGameToBoardGameLists(boardGameListRepository, (List<BoardGameList>) params[0], (BoardGame) params[1]);

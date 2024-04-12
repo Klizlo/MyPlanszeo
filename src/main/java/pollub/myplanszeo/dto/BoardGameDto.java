@@ -3,6 +3,7 @@ package pollub.myplanszeo.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pollub.myplanszeo.model.AgeRestriction;
 
 //Tydzień 3, Wzorzec Composite 1
@@ -11,6 +12,7 @@ import pollub.myplanszeo.model.AgeRestriction;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public abstract class BoardGameDto {
 
     private Long id;

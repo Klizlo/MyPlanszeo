@@ -1,6 +1,8 @@
 package pollub.myplanszeo.proxy;
 
+import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.exception.UnauthorizedException;
+import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.BoardGameListService;
 
@@ -42,6 +44,11 @@ public class BoardGameListServiceProxy implements BoardGameListService {
             selected = new ArrayList<Long>();
         }
         boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
+    }
+
+    @Override
+    public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
+        return boardGameListService.editBoardGameList(boardGameListToEdit, boardGameList);
     }
 
     @Override

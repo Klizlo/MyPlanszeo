@@ -1,6 +1,8 @@
 package pollub.myplanszeo.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.FileService;
 
@@ -15,6 +17,8 @@ public interface BoardGameListFacade {
     BoardGameList getBoardGameListByIdAndUserId(Long boardGameListId, Long userId);
     BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId);
     void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long id);
+    BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList);
+
     byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType) throws JsonProcessingException;
 }
 //Koniec, Tydzień 4, Wzorzec Facade 1

@@ -1,18 +1,26 @@
 package pollub.myplanszeo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 //Tydzień 2, Wzorzec Builder 3
 // Wzorzec builder pozwala na wygodniejsze utworzenie obiektu klasy FullBoardGameListDto,
 // ponieważ nie trzeba pamiętać wszystkich argumentów, jakie należy podać do konstruktora
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class FullBoardGameListDto extends BoardGameListDto {
 
-    private Set<BoardGame> boardGames;
+    private List<BoardGame> boardGames;
 
     private FullBoardGameListDto(Builder builder) {
         super(builder.id, builder.name, builder.description);
@@ -20,7 +28,7 @@ public class FullBoardGameListDto extends BoardGameListDto {
     }
 
     public BoardGameListDtoMemento saveToMemento() {
-        return new BoardGameListDtoMemento(this.getId(), this.getName(), this.getDescription(), this.getBoardGames());
+        return new BoardGameListDtoMemento(this.getId(), this.getName(), this.getDescription(), this.boardGames);
     }
 
     public void undoFromMemento(BoardGameListDtoMemento memento) {
@@ -34,12 +42,15 @@ public class FullBoardGameListDto extends BoardGameListDto {
         private Long id;
         private String name;
         private String description;
-        private Set<BoardGame> boardGames;
+        private List<BoardGame> boardGames;
 
         public Builder(Long id, String name, Set<BoardGame> boardGames) {
             this.id = id;
             this.name = name;
-            this.boardGames = boardGames;
+            this.boardGames = new ArrayList<>();
+            for (BoardGame boardGame : boardGames) {
+                this.boardGames.add(boardGame);
+            }
         }
 
         public Builder setDescription(String description) {

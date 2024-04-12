@@ -2,6 +2,9 @@ package pollub.myplanszeo.unit.designPattern.behavioral;
 
 import org.junit.jupiter.api.Test;
 import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.SimpleBoardGameDto;
+import pollub.myplanszeo.dto.mapper.BaseBoardGameDtoMapper;
+import pollub.myplanszeo.dto.mapper.BoardGameMapper;
 import pollub.myplanszeo.memento.BoardGameListCaretaker;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.AgeRestriction;
@@ -25,7 +28,7 @@ public class MementoTest {
         BoardGameListCaretaker boardGameListCaretaker = new BoardGameListCaretaker();
         boardGameListCaretaker.addMemento(fullBoardGameListDto.saveToMemento());
 
-        BoardGameListDtoMemento memento = boardGameListCaretaker.getMemento();
+        BoardGameListDtoMemento memento = boardGameListCaretaker.revert();
         fullBoardGameListDto.getBoardGames().add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, null, new HashSet<>(), null, null));
         BoardGameListDtoMemento memento1 = fullBoardGameListDto.saveToMemento();
 

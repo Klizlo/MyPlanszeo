@@ -20,7 +20,6 @@ public class RemoveBoardGameFromBoardGameLists implements BoardGameListCommand {
             boardGame.getBoardGameLists().remove(boardGameList);
             System.out.println(boardGameList);
         }
-        System.out.println("COS");
         return boardGameListRepository.saveAll(boardGameLists);
     }
 }

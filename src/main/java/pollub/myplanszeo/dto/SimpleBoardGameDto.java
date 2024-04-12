@@ -1,5 +1,6 @@
 package pollub.myplanszeo.dto;
 
+import lombok.*;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.Category;
 
@@ -10,6 +11,9 @@ import pollub.myplanszeo.model.Category;
 // Tydzien 2, Wzorzec Builder 1
 // Wzorzec Builder służy do łatwiejszego tworzenia obiektów, ponieważ eliminuje potrzebę zapamiętywania,
 // na którym miejscu w konstruktorzse znajduje się dany argument
+@Getter
+@Setter
+@AllArgsConstructor
 public class SimpleBoardGameDto extends BoardGameDto {
 
     private SimpleBoardGameDto(Builder builder) {
@@ -23,6 +27,19 @@ public class SimpleBoardGameDto extends BoardGameDto {
             builder.maxNumOfPlayers,
             builder.category
         );
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleBoardGameDto{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", ageRestriction=" + getAgeRestriction() +
+                ", description='" + getDescription() + '\'' +
+                ", producer='" + getProducer() + '\'' +
+                ", minNumOfPlayers=" + getMinNumOfPlayers() +
+                ", maxNumOfPlayers=" + getMaxNumOfPlayers() +
+                '}';
     }
 
     public static class Builder{
