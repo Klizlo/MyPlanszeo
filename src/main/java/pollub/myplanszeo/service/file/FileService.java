@@ -1,6 +1,5 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.file;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpHeaders;
 import pollub.myplanszeo.model.BoardGameList;
 

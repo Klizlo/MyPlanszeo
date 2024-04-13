@@ -1,7 +1,5 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.file;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import pollub.myplanszeo.adapter.FileAdapter;
@@ -10,7 +8,7 @@ import pollub.myplanszeo.exception.FileTypeNotFoundException;
 import pollub.myplanszeo.model.BoardGameList;
 
 @Service
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
 
     @Override
     public byte[] getBoardGameList(BoardGameList boardGameList, FileType fileType) {

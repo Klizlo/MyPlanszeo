@@ -2,7 +2,6 @@ package pollub.myplanszeo.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,7 +18,7 @@ import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.memento.BoardGameListCaretaker;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGameList;
-import pollub.myplanszeo.service.FileService;
+import pollub.myplanszeo.service.file.FileService;
 
 import java.util.HashSet;
 import java.util.List;

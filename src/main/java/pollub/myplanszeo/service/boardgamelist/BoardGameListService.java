@@ -1,7 +1,6 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.boardgamelist;
 
 import pollub.myplanszeo.dto.FullBoardGameListDto;
-import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 
 import java.util.List;

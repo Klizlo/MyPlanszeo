@@ -3,7 +3,7 @@ package pollub.myplanszeo.config;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import pollub.myplanszeo.proxy.BoardGameListServiceProxy;
-import pollub.myplanszeo.service.BoardGameListService;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
 
 public class BoardGameListServiceBeanProcessor implements BeanPostProcessor {
 

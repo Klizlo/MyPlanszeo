@@ -2,8 +2,8 @@ package pollub.myplanszeo.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import pollub.myplanszeo.service.LoggingUserService;
-import pollub.myplanszeo.service.UserService;
+import pollub.myplanszeo.service.user.LoggingUserService;
+import pollub.myplanszeo.service.user.UserService;
 
 public class UserServiceDecoratorBeanProcessor implements BeanPostProcessor {
 

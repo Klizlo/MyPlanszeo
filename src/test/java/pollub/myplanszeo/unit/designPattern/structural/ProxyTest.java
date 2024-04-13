@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pollub.myplanszeo.model.*;
 import pollub.myplanszeo.proxy.BoardGameListServiceProxy;
-import pollub.myplanszeo.service.BoardGameListServiceImpl;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;

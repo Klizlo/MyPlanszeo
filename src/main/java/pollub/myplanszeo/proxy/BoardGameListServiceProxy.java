@@ -2,9 +2,8 @@ package pollub.myplanszeo.proxy;
 
 import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.exception.UnauthorizedException;
-import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
-import pollub.myplanszeo.service.BoardGameListService;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
 
 import java.util.ArrayList;
 import java.util.List;

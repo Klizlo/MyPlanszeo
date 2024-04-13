@@ -1,18 +1,22 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.boardgamelist;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
-import pollub.myplanszeo.dto.BoardGameDto;
 import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
+import pollub.myplanszeo.observer.Observable;
+import pollub.myplanszeo.service.notification.NotificationService;
+import pollub.myplanszeo.service.user.UserService;
 
 import java.util.List;
 
-public class BoardGameListServiceImpl implements BoardGameListService{
+//Tydzień 6, Wzorzec Observer 1
+//Implementuje interfejs Observable, ma za zadnie poinformowanie obserwatorów, gdy lista gier zostanie zeedytowana
+public class BoardGameListServiceImpl implements BoardGameListService, Observable {
 
     @Autowired
     private BoardGameListCommandFactory commandFactory;
@@ -20,6 +24,8 @@ public class BoardGameListServiceImpl implements BoardGameListService{
     private UserService userService;
     @Autowired
     private BoardGameCache boardGameCache;
+    @Autowired
+    private List<NotificationService> notificationServices;
 
     @Override
     public List<BoardGameList> getAllBoardGameListByUserId(Long userId) {
@@ -87,9 +93,11 @@ public class BoardGameListServiceImpl implements BoardGameListService{
                 boardGameListToEdit.getBoardGames().remove(boardGame);
             }
         }
-        return (BoardGameList) commandFactory
+        BoardGameList editedBoarGameList = (BoardGameList) commandFactory
                 .create(BoardGameListCommand.CommandType.EDIT_BOARD_GAME_LIST, boardGameListToEdit, boardGameList)
                 .execute();
+        notifyAllObservers(editedBoarGameList);
+        return editedBoarGameList;
     }
 
     @Override
@@ -104,5 +112,12 @@ public class BoardGameListServiceImpl implements BoardGameListService{
         return (boolean) commandFactory
                 .create(BoardGameListCommand.CommandType.CHECK_BOARD_GAME_LIST, boardGameListId, userId)
                 .execute();
+    }
+
+    @Override
+    public void notifyAllObservers(BoardGameList boardGameList) {
+        for (NotificationService notificationService: notificationServices) {
+            notificationService.update(boardGameList);
+        }
     }
 }

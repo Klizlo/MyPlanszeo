@@ -1,7 +1,7 @@
 package pollub.myplanszeo.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import pollub.myplanszeo.service.FileService;
+import pollub.myplanszeo.service.file.FileService;
 
 public class StringToFileTypeConverter implements Converter<String, FileService.FileType> {
     @Override

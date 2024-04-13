@@ -1,10 +1,7 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pollub.myplanszeo.model.User;
 
 

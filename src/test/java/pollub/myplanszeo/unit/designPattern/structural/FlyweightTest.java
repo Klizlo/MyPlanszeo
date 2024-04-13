@@ -10,7 +10,7 @@ import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.Category;
-import pollub.myplanszeo.service.BoardGameService;
+import pollub.myplanszeo.service.boardgame.BoardGameService;
 
 import java.util.ArrayList;
 import java.util.HashSet;

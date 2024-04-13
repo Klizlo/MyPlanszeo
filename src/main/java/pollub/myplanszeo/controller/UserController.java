@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pollub.myplanszeo.model.User;
-import pollub.myplanszeo.service.UserService;
+import pollub.myplanszeo.service.user.UserService;
 
 @Controller
 @RequiredArgsConstructor

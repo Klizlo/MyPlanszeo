@@ -1,4 +1,4 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.user;
 
 import pollub.myplanszeo.model.User;
 

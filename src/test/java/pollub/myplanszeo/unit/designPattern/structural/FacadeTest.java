@@ -13,8 +13,8 @@ import pollub.myplanszeo.adapter.FileAdapterImpl;
 import pollub.myplanszeo.facade.BoardGameListFacadeImpl;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
-import pollub.myplanszeo.service.BoardGameListService;
-import pollub.myplanszeo.service.FileService;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
+import pollub.myplanszeo.service.file.FileService;
 
 import java.io.IOException;
 import java.util.ArrayList;

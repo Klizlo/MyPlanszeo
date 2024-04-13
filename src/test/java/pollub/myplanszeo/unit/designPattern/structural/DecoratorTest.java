@@ -13,14 +13,10 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
-import org.springframework.security.core.userdetails.UserDetails;
-import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.config.test.MemoryLogger;
 import pollub.myplanszeo.model.User;
-import pollub.myplanszeo.service.LoggingUserService;
-import pollub.myplanszeo.service.UserService;
-
-import java.util.ArrayList;
+import pollub.myplanszeo.service.user.LoggingUserService;
+import pollub.myplanszeo.service.user.UserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;

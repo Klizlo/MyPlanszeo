@@ -3,7 +3,7 @@ package pollub.myplanszeo.flyweight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pollub.myplanszeo.model.BoardGame;
-import pollub.myplanszeo.service.BoardGameService;
+import pollub.myplanszeo.service.boardgame.BoardGameService;
 
 import java.util.HashMap;
 import java.util.List;

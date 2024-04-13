@@ -1,4 +1,4 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.boardgame;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

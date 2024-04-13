@@ -1,15 +1,9 @@
-package pollub.myplanszeo.service;
+package pollub.myplanszeo.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.model.User;
 import pollub.myplanszeo.repository.UserRepository;
-
-import java.util.ArrayList;
 
 public class UserServiceImpl implements UserService {
 

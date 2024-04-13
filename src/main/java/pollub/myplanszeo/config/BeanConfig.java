@@ -2,11 +2,10 @@ package pollub.myplanszeo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import pollub.myplanszeo.service.BoardGameListService;
-import pollub.myplanszeo.service.BoardGameListServiceImpl;
-import pollub.myplanszeo.service.UserService;
-import pollub.myplanszeo.service.UserServiceImpl;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
+import pollub.myplanszeo.service.boardgamelist.BoardGameListServiceImpl;
+import pollub.myplanszeo.service.user.UserService;
+import pollub.myplanszeo.service.user.UserServiceImpl;
 
 @Configuration
 public class BeanConfig {
