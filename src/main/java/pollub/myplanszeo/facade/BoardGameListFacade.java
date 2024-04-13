@@ -1,7 +1,7 @@
 package pollub.myplanszeo.facade;
 
 import org.springframework.http.HttpHeaders;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.file.FileService;
 
@@ -18,9 +18,9 @@ public interface BoardGameListFacade {
     void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long id);
     BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList);
     void removeBoardGameList(Long boardGameListId, Long userId);
-
-
     byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType);
     void prepareFileType(FileService.FileType type, HttpHeaders headers, BoardGameList boardGameList);
+
+    void changeBoardGameListState(Long boardGameListId, Long userId);
 }
 //Koniec, Tydzień 4, Wzorzec Facade 1

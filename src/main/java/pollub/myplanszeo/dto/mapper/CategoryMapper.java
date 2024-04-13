@@ -1,6 +1,6 @@
 package pollub.myplanszeo.dto.mapper;
 
-import pollub.myplanszeo.dto.CategoryDto;
+import pollub.myplanszeo.dto.category.CategoryDto;
 import pollub.myplanszeo.model.Category;
 
 import java.util.List;

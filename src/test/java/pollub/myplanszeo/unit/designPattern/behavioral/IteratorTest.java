@@ -2,6 +2,7 @@ package pollub.myplanszeo.unit.designPattern.behavioral;
 
 import org.junit.jupiter.api.Test;
 import pollub.myplanszeo.model.*;
+import pollub.myplanszeo.state.BoardGameListActiveState;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,7 +36,7 @@ public class IteratorTest {
         boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, new HashSet<>(), null, null));
         boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, new HashSet<>(), null, null));
 
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames, new User(1L, "adam.nowak@poczta.pl", "AFabcabcbahucyba", null));
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), boardGames, new User(1L, "adam.nowak@poczta.pl", "AFabcabcbahucyba", null));
 
         return boardGameList;
     }

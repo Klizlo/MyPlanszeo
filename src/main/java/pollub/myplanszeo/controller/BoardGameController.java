@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pollub.myplanszeo.config.security.CustomUserDetails;
-import pollub.myplanszeo.dto.BoardGameListFactory;
+import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
 import pollub.myplanszeo.dto.mapper.*;
 import pollub.myplanszeo.facade.BoardGameListFacade;
 import pollub.myplanszeo.flyweight.BoardGameCache;

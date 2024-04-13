@@ -3,7 +3,7 @@ package pollub.myplanszeo.facade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
 import pollub.myplanszeo.service.file.FileService;
@@ -56,5 +56,10 @@ public class BoardGameListFacadeImpl implements BoardGameListFacade {
     @Override
     public void prepareFileType(FileService.FileType type, HttpHeaders headers, BoardGameList boardGameList) {
         fileService.prepareFileType(type, headers, boardGameList);
+    }
+
+    @Override
+    public void changeBoardGameListState(Long boardGameListId, Long userId) {
+        boardGameListService.changeBoardGameListState(boardGameListId, userId);
     }
 }

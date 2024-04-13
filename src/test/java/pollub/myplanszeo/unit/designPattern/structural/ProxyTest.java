@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pollub.myplanszeo.model.*;
 import pollub.myplanszeo.proxy.BoardGameListServiceProxy;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListServiceImpl;
+import pollub.myplanszeo.state.BoardGameListActiveState;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +37,7 @@ public class ProxyTest {
         boardGames.add(new BoardGame(1L, "Munchkin", AgeRestriction.PLUS_7, "", "BlackMonkGames", 2, 6, cardGame, new HashSet<>(), null, null));
         boardGames.add(new BoardGame(2L, "Mansion of Madness", AgeRestriction.PLUS_12, "", "FFG", 1, 5, cooperative, new HashSet<>(), null, null));
 
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", boardGames, user);
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), boardGames, user);
 
         given(boardGameListService.existsBoardGameListByIdAndUserId(1L, 1L))
                 .willReturn(true);

@@ -1,10 +1,7 @@
 package pollub.myplanszeo.unit.designPattern.behavioral;
 
 import org.junit.jupiter.api.Test;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
-import pollub.myplanszeo.dto.SimpleBoardGameDto;
-import pollub.myplanszeo.dto.mapper.BaseBoardGameDtoMapper;
-import pollub.myplanszeo.dto.mapper.BoardGameMapper;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.memento.BoardGameListCaretaker;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.AgeRestriction;

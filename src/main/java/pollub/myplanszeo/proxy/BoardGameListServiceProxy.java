@@ -1,6 +1,6 @@
 package pollub.myplanszeo.proxy;
 
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.exception.UnauthorizedException;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
@@ -38,11 +38,11 @@ public class BoardGameListServiceProxy implements BoardGameListService {
     }
 
     @Override
-    public void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
+    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
         if (selected == null) {
             selected = new ArrayList<Long>();
         }
-        boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
+        return boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
     }
 
     @Override
@@ -56,6 +56,13 @@ public class BoardGameListServiceProxy implements BoardGameListService {
             throw new UnauthorizedException();
         }
         boardGameListService.removeBoardGameList(boardGameListId, userId);
+    }
+
+    @Override
+    public void changeBoardGameListState(Long boardGameListId, Long userId) {
+        if (existsBoardGameListByIdAndUserId(boardGameListId, userId)){
+            boardGameListService.changeBoardGameListState(boardGameListId, userId);
+        }
     }
 
     @Override

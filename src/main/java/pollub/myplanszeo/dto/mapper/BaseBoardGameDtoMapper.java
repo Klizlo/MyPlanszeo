@@ -1,7 +1,7 @@
 package pollub.myplanszeo.dto.mapper;
 
-import pollub.myplanszeo.dto.BaseBoardGameDto;
-import pollub.myplanszeo.dto.BoardGameDto;
+import pollub.myplanszeo.dto.boardgame.BaseBoardGameDto;
+import pollub.myplanszeo.dto.boardgame.BoardGameDto;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.List;

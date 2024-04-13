@@ -1,7 +1,7 @@
 package pollub.myplanszeo.command.boardgamelist;
 
 import lombok.RequiredArgsConstructor;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.repository.BoardGameListRepository;
 

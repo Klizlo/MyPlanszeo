@@ -3,6 +3,8 @@ package pollub.myplanszeo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import pollub.myplanszeo.state.BoardGameListActiveState;
+import pollub.myplanszeo.state.BoardGameListState;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,6 +25,8 @@ public class BoardGameList implements Cloneable {
     private Long id;
     private String name;
     private String description;
+    @Transient
+    private BoardGameListState state = BoardGameListActiveState.instance();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -51,9 +55,13 @@ public class BoardGameList implements Cloneable {
             boardGame.getBoardGameLists().add(this);
             clonedBoardGames.add(boardGame);
         }
-        BoardGameList boardGameList = new BoardGameList(null, this.name, this.description, clonedBoardGames, user);
+        BoardGameList boardGameList = new BoardGameList(null, this.name, this.description, this.state, clonedBoardGames, user);
         user.getBoardGameLists().add(boardGameList);
         return boardGameList;
     }
     //Koniec, Tydzień 2, Wzorzec Prototype 1
+
+    public void update(){
+        this.state.updateState(this);
+    }
 }

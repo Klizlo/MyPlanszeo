@@ -1,4 +1,4 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.category;
 
 import lombok.Getter;
 

@@ -3,7 +3,7 @@ package pollub.myplanszeo.service.boardgamelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
@@ -13,6 +13,7 @@ import pollub.myplanszeo.service.notification.NotificationService;
 import pollub.myplanszeo.service.user.UserService;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 //Tydzień 6, Wzorzec Observer 1
 //Implementuje interfejs Observable, ma za zadnie poinformowanie obserwatorów, gdy lista gier zostanie zeedytowana
@@ -53,7 +54,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
-    public void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
+    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
         List<BoardGameList> gameLists = getAllBoardGameListByUserId(userId);
         BoardGame boardGame = boardGameCache.getBoardGameById(gameId);
 
@@ -66,11 +67,14 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
                 .filter(boardGameList -> boardGameList.getBoardGames().contains(boardGame))
                 .toList();
 
-        commandFactory
+        List<BoardGameList> boardGameListsAfterAddGame = (List<BoardGameList>) commandFactory
                 .create(BoardGameListCommand.CommandType.ADD_BOARD_GAME_TO_LISTS, boardGameListsToAddGame, boardGame)
                 .execute();
-        commandFactory.create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_FROM_LISTS, boardGameListsToRemoveGame, boardGame)
+        List<BoardGameList> boardGameListsAfterRemoveGame = (List<BoardGameList>) commandFactory.create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_FROM_LISTS, boardGameListsToRemoveGame, boardGame)
                 .execute();
+
+        return Stream.concat(boardGameListsAfterAddGame.stream(), boardGameListsAfterRemoveGame.stream())
+                .toList();
     }
 
     @Override
@@ -106,6 +110,9 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
                 .create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_LIST, boardGameListId)
                 .execute();
     }
+
+    @Override
+    public void changeBoardGameListState(Long boardGameListId, Long userId) {}
 
     @Override
     public boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {

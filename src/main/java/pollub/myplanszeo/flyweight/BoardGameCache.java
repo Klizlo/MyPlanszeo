@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 
-//Tydzień 4, Wzorzec Flyweight
-//Klasa ta jest cachem dla listy gier planszowych dostępnym w serwisie
+//Tydzień 4, Wzorzec Flyweight 1
+//Klasa ta jest cachem dla gier planszowych dostępnym w serwisie
 //Pozwala to na zmniejszenie zapytań do bazy danych oraz na skrócenie czasu w jakim klient otrzyma żądanie
 @Component
 @RequiredArgsConstructor
@@ -40,4 +40,4 @@ public class BoardGameCache {
     }
 
 }
-//Koniec, Tydzień 4, Wzorzec Flyweight
+//Koniec, Tydzień 4, Wzorzec Flyweight 1

@@ -9,16 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pollub.myplanszeo.config.security.CustomUserDetails;
-import pollub.myplanszeo.dto.BoardGameListDto;
-import pollub.myplanszeo.dto.BoardGameListFactory;
-import pollub.myplanszeo.dto.FullBoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.BoardGameListDto;
+import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.dto.mapper.BoardGameListMapper;
 import pollub.myplanszeo.facade.BoardGameListFacade;
-import pollub.myplanszeo.flyweight.BoardGameCache;
 import pollub.myplanszeo.memento.BoardGameListCaretaker;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.file.FileService;
+import pollub.myplanszeo.state.BoardGameListEditState;
+import pollub.myplanszeo.state.BoardGameListState;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,6 @@ import java.util.List;
 public class BoardGameListController {
 
     private final BoardGameListFacade boardGameListFacade;
-    private final BoardGameCache boardGameCache;
 
     @GetMapping("/boardgamelists")
     public String getAllBoardGameLists(Model model, Authentication authentication) {
@@ -87,9 +87,21 @@ public class BoardGameListController {
     public String getUpdateBoardGameListForm(@PathVariable Long id, Model model, Authentication authentication) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
+        if (boardGameList.getState().equals(BoardGameListEditState.instance())) {
+            return "boardgamelist/boardgamelists";
+        }
+        boardGameList.setState(BoardGameListEditState.instance());
         model.addAttribute("list", (FullBoardGameListDto) BoardGameListMapper.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
 
         return "boardgamelist/update_boardgamelist_form";
+    }
+
+    @PostMapping("/boardgamelists/{id}/state")
+    public String setBoardGameListState(@PathVariable Long boardGameListId, Authentication authentication, HttpServletRequest request) {
+        CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+        boardGameListFacade.changeBoardGameListState(boardGameListId, principal.getId());
+
+        return "redirect:/boardgamelists";
     }
 
     @PostMapping("/boardgamelists/{id}/edit")

@@ -15,6 +15,7 @@ import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
 import pollub.myplanszeo.service.file.FileService;
+import pollub.myplanszeo.state.BoardGameListActiveState;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class FacadeTest {
     public void givenUserId_whenGetAllBoardGameListsByUserId_returnBoardGameLists() {
         User user = new User(1L, "adam.nowak@poczta.pl", "Adqu28qtyubahhj1!?q", new ArrayList<>());
         List<BoardGameList> boardGameLists = Lists.newArrayList(
-                new BoardGameList(1L, "Favorite", "", null, user),
-                new BoardGameList(2L, "To Play", "", null, user)
+                new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), null, user),
+                new BoardGameList(2L, "To Play", "", BoardGameListActiveState.instance(), null, user)
         );
         user.setBoardGameLists(boardGameLists);
 
@@ -55,7 +56,7 @@ public class FacadeTest {
     @Test
     public void givenUserIdAndBoardGameId_whenGetBoardGameListByIdAndUserId_returnBoardGameList() {
         User user = new User(1L, "adam.nowak@poczta.pl", "Adqu28qtyubahhj1!?q", new ArrayList<>());
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", null, user);
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "",BoardGameListActiveState.instance(),  null, user);
         user.getBoardGameLists().add(boardGameList);
 
         when(boardGameListService.getBoardGameListByIdAndUserId(boardGameList.getId(), user.getId()))
@@ -69,7 +70,7 @@ public class FacadeTest {
     @Test
     public void givenUserIdAndBoardGameIdAndFileType_whenGetBoardGameListAsFile_returnBoardGameListAsByteArray() throws IOException {
         User user = new User(1L, "adam.nowak@poczta.pl", "Adqu28qtyubahhj1!?q", new ArrayList<>());
-        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", null, user);
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), null, user);
         user.getBoardGameLists().add(boardGameList);
         FileService.FileType fileType = FileService.FileType.JSON;
 

@@ -1,4 +1,4 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgamelist;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +23,9 @@ public class FullBoardGameListDto extends BoardGameListDto {
     private List<BoardGame> boardGames;
 
     private FullBoardGameListDto(Builder builder) {
-        super(builder.id, builder.name, builder.description);
+        super(builder.id, builder.name, builder.description, builder.state);
         this.boardGames = builder.boardGames;
+        System.out.println(getState());
     }
 
     public BoardGameListDtoMemento saveToMemento() {
@@ -42,6 +43,7 @@ public class FullBoardGameListDto extends BoardGameListDto {
         private Long id;
         private String name;
         private String description;
+        private String state;
         private List<BoardGame> boardGames;
 
         public Builder(Long id, String name, Set<BoardGame> boardGames) {
@@ -55,6 +57,11 @@ public class FullBoardGameListDto extends BoardGameListDto {
 
         public Builder setDescription(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder setState(String state) {
+            this.state = state;
             return this;
         }
 

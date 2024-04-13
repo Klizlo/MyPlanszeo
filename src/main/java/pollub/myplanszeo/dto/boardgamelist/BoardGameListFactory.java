@@ -1,4 +1,4 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgamelist;
 
 import pollub.myplanszeo.model.BoardGameList;
 
@@ -10,13 +10,17 @@ public class BoardGameListFactory {
     public static BoardGameListDto getBoardGameList(BoardGameList gameList, BoardGameListType type) {
         switch (type) {
             case Simple -> {
+                System.out.println(gameList.getState().getStateName());
                 return new SimpleBoardGameListDto.Builder(gameList.getId(), gameList.getName(), gameList.getBoardGames().size())
                         .setDescription(gameList.getDescription())
+                        .setState(gameList.getState().getStateName())
                         .build();
             }
             case Full -> {
+                System.out.println(gameList.getState().getStateName());
                 return new FullBoardGameListDto.Builder(gameList.getId(), gameList.getName(), gameList.getBoardGames())
                         .setDescription(gameList.getDescription())
+                        .setState(gameList.getState().getStateName())
                         .build();
             }
             default -> {

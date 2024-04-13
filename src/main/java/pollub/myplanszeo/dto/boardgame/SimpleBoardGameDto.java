@@ -1,6 +1,7 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgame;
 
 import lombok.*;
+import pollub.myplanszeo.dto.category.CategoryDto;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.Category;
 

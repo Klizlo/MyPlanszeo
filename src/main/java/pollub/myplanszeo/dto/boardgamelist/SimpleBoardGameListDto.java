@@ -1,4 +1,4 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgamelist;
 
 import lombok.Getter;
 
@@ -11,8 +11,9 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
     private Integer numberOfGames;
 
     private SimpleBoardGameListDto(Builder builder) {
-        super(builder.id, builder.name, builder.description);
+        super(builder.id, builder.name, builder.description, builder.state);
         this.numberOfGames = builder.numberOfGames;
+        System.out.println(getState());
     }
 
     public static class Builder {
@@ -20,6 +21,7 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
         private Long id;
         private String name;
         private String description;
+        private String state;
         private Integer numberOfGames;
 
         public Builder(Long id, String name, Integer numberOfGames) {
@@ -30,6 +32,12 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
 
         public Builder setDescription(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder setState(String state) {
+            this.state = state;
+            System.out.println(this.state);
             return this;
         }
 

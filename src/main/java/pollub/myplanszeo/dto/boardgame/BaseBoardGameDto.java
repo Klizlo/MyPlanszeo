@@ -1,6 +1,7 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgame;
 
 import lombok.Getter;
+import pollub.myplanszeo.dto.category.CategoryDto;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameIterator;
@@ -18,7 +19,7 @@ import java.util.List;
 // Wzorzec Builder służy do łatwiejszego tworzenia obiektów, ponieważ eliminuje potrzebę zapamiętywania,
 // na którym miejscu w konstruktorzse znajduje się dany argument
 @Getter
-public class BaseBoardGameDto extends BoardGameDto{
+public class BaseBoardGameDto extends BoardGameDto {
 
     private List<BoardGameDto> expansions;
 

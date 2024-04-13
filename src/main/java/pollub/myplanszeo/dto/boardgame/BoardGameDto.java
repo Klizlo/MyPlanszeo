@@ -1,9 +1,10 @@
-package pollub.myplanszeo.dto;
+package pollub.myplanszeo.dto.boardgame;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pollub.myplanszeo.dto.category.CategoryDto;
 import pollub.myplanszeo.model.AgeRestriction;
 
 //Tydzień 3, Wzorzec Composite 1
