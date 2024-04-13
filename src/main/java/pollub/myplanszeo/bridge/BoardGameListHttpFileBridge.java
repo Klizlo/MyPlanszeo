@@ -15,7 +15,7 @@ public class BoardGameListHttpFileBridge extends HttpFileBridger {
     }
 
     @Override
-    public byte[] getData(Object dataObject) throws JsonProcessingException {
+    public byte[] getData(Object dataObject) {
         return httpFileProcessor.getAsFile((BoardGameList) dataObject);
     }
 }

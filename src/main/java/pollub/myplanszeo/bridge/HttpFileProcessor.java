@@ -8,7 +8,7 @@ import pollub.myplanszeo.model.BoardGameList;
 //Pozwala to na zapisanie listy gier na tablicę bajtów w zależności od tego w jakiej postaci chcemy te dane zapisać (JSON, XML, CSV)
 public interface HttpFileProcessor {
 
-    public byte[] getAsFile(BoardGameList boardGameList) throws JsonProcessingException;
+    public byte[] getAsFile(BoardGameList boardGameList);
 
 }
 //Koniec, Tydzień 3, Wzorzec Bridge 1

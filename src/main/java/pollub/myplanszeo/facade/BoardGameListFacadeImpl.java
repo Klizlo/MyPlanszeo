@@ -2,6 +2,7 @@ package pollub.myplanszeo.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGame;
@@ -44,8 +45,18 @@ public class BoardGameListFacadeImpl implements BoardGameListFacade {
     }
 
     @Override
-    public byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType) throws JsonProcessingException {
+    public void removeBoardGameList(Long boardGameListId, Long userId) {
+        boardGameListService.removeBoardGameList(boardGameListId, userId);
+    }
+
+    @Override
+    public byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType) {
         BoardGameList boardGameList = getBoardGameListByIdAndUserId(boardGameListId, userId);
         return fileService.getBoardGameList(boardGameList, fileType);
+    }
+
+    @Override
+    public void prepareFileType(FileService.FileType type, HttpHeaders headers, BoardGameList boardGameList) {
+        fileService.prepareFileType(type, headers, boardGameList);
     }
 }

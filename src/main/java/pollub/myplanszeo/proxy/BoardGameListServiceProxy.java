@@ -52,6 +52,14 @@ public class BoardGameListServiceProxy implements BoardGameListService {
     }
 
     @Override
+    public void removeBoardGameList(Long boardGameListId, Long userId) {
+        if (!existsBoardGameListByIdAndUserId(boardGameListId, userId)){
+            throw new UnauthorizedException();
+        }
+        boardGameListService.removeBoardGameList(boardGameListId, userId);
+    }
+
+    @Override
     public boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {
         return boardGameListService.existsBoardGameListByIdAndUserId(boardGameListId, userId);
     }

@@ -18,7 +18,7 @@ public class FileAdapterImpl implements FileAdapter {
     }
 
     @Override
-    public byte[] getBoardGameListAsJSON() throws JsonProcessingException {
+    public byte[] getBoardGameListAsJSON() {
         HttpFileBridger httpFileBridger = new BoardGameListHttpFileBridge(new HttpJsonFileProcessor());
         return httpFileBridger.getData(boardGameList);
     }

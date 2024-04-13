@@ -93,6 +93,13 @@ public class BoardGameListServiceImpl implements BoardGameListService{
     }
 
     @Override
+    public void removeBoardGameList(Long boardGameListId, Long userId) {
+        commandFactory
+                .create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_LIST, boardGameListId)
+                .execute();
+    }
+
+    @Override
     public boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {
         return (boolean) commandFactory
                 .create(BoardGameListCommand.CommandType.CHECK_BOARD_GAME_LIST, boardGameListId, userId)

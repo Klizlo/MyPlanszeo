@@ -47,24 +47,26 @@
                 <td th:text="${list.getNumberOfGames()}" />
                 <td>
                     <div>
-                        <a th:href="@{/boardgamelists/{id}(id = ${list.getId()})}">
+                        <a th:href="@{/boardgamelists/{id}(id = ${list.getId()})}" class="link-underline-opacity-0">
                             <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Show">
                                 <span class="material-icons">info</span>
                             </button>
                         </a>
-                        <a th:href="@{/boardgamelists/{id}/edit(id = ${list.getId()})}">
+                        <a th:href="@{/boardgamelists/{id}/edit(id = ${list.getId()})}" class="link-underline-opacity-0">
                             <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
                                 <span class="material-icons">edit</span>
                             </button>
                         </a>
-                        <a th:href="@{/boardgamelists/{id}/copy(id = ${list.getId()})}">
+                        <a th:href="@{/boardgamelists/{id}/copy(id = ${list.getId()})}" class="link-underline-opacity-0">
                             <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Copy">
                                 <span class="material-icons">content_copy</span>
                             </button>
                         </a>
-                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
-                            <span class="material-icons">delete</span>
-                        </button>
+                        <a th:href="@{/boardgamelists/{id}/delete(id = ${list.getId()})}" class="link-underline-opacity-0">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                <span class="material-icons">delete</span>
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>

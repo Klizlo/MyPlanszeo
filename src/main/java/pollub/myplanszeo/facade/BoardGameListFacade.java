@@ -1,6 +1,7 @@
 package pollub.myplanszeo.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.http.HttpHeaders;
 import pollub.myplanszeo.dto.FullBoardGameListDto;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
@@ -18,7 +19,10 @@ public interface BoardGameListFacade {
     BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId);
     void modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long id);
     BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList);
+    void removeBoardGameList(Long boardGameListId, Long userId);
 
-    byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType) throws JsonProcessingException;
+
+    byte[] getBoardGameListAsFile(Long boardGameListId, Long userId, FileService.FileType fileType);
+    void prepareFileType(FileService.FileType type, HttpHeaders headers, BoardGameList boardGameList);
 }
 //Koniec, Tydzień 4, Wzorzec Facade 1

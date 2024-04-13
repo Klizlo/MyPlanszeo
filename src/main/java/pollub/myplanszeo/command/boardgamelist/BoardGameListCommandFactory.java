@@ -39,6 +39,9 @@ public class BoardGameListCommandFactory {
             case REMOVE_BOARD_GAME_FROM_LISTS -> {
                 return new RemoveBoardGameFromBoardGameLists(boardGameListRepository, (List<BoardGameList>) params[0], (BoardGame) params[1]);
             }
+            case REMOVE_BOARD_GAME_LIST -> {
+                return new RemoveBoardGameList(boardGameListRepository, (Long) params[0]);
+            }
             case CHECK_BOARD_GAME_LIST -> {
                 return new CheckBoardGameListCommand(boardGameListRepository, (Long) params[0], (Long) params[1]);
             }

@@ -12,11 +12,15 @@ import java.nio.charset.StandardCharsets;
 public class HttpJsonFileProcessor implements HttpFileProcessor{
 
     @Override
-    public byte[] getAsFile(BoardGameList boardGameList) throws JsonProcessingException {
+    public byte[] getAsFile(BoardGameList boardGameList) {
         ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-        String json = objectMapper.writeValueAsString(boardGameList);
-        return json.getBytes(StandardCharsets.UTF_8);
+        try {
+            String json = objectMapper.writeValueAsString(boardGameList);
+            return json.getBytes(StandardCharsets.UTF_8);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
