@@ -18,7 +18,6 @@ public class RemoveBoardGameFromBoardGameLists implements BoardGameListCommand {
         for (BoardGameList boardGameList : boardGameLists) {
             boardGameList.getBoardGames().remove(boardGame);
             boardGame.getBoardGameLists().remove(boardGameList);
-            System.out.println(boardGameList);
         }
         return boardGameListRepository.saveAll(boardGameLists);
     }

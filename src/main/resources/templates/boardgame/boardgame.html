@@ -35,6 +35,10 @@
                         <td>Category</td>
                         <td th:text="${game.getCategory().getName()}"/>
                     </tr>
+                    <tr>
+                        <td>Popularity</td>
+                        <td th:text="${game.occurrence}" />
+                    </tr>
                     </tbody>
                 </table>
             </div>

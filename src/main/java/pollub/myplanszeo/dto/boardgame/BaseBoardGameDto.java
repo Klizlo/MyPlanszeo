@@ -22,6 +22,7 @@ import java.util.List;
 public class BaseBoardGameDto extends BoardGameDto {
 
     private List<BoardGameDto> expansions;
+    private Integer occurrence;
 
     private BaseBoardGameDto(Builder builder) {
         super(
@@ -35,6 +36,7 @@ public class BaseBoardGameDto extends BoardGameDto {
                 builder.category
         );
         this.expansions = builder.expansions;
+        this.occurrence = builder.occurrence;
     }
 
     public static class Builder{
@@ -47,6 +49,7 @@ public class BaseBoardGameDto extends BoardGameDto {
         private Integer maxNumOfPlayers;
         private CategoryDto category;
         private List<BoardGameDto> expansions;
+        private Integer occurrence;
 
         public Builder(Long id, String name, String producer, Category category, List<BoardGame> expansions) {
             this.id = id;
@@ -87,6 +90,11 @@ public class BaseBoardGameDto extends BoardGameDto {
 
         public BaseBoardGameDto.Builder setMaxNumOfPlayers(Integer maxNumOfPlayers) {
             this.maxNumOfPlayers = maxNumOfPlayers;
+            return this;
+        }
+
+        public BaseBoardGameDto.Builder setOccurrence(Integer occurrence) {
+            this.occurrence = occurrence;
             return this;
         }
 

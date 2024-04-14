@@ -22,7 +22,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String processRegister(User user) {
-        System.out.println(user);
         userService.addUser(user);
         return "auth/signup_success";
     }

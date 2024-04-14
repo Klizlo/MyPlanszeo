@@ -112,7 +112,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
-    public void changeBoardGameListState(Long boardGameListId, Long userId) {}
+public void changeBoardGameListState(Long boardGameListId, Long userId) {}
 
     @Override
     public boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {

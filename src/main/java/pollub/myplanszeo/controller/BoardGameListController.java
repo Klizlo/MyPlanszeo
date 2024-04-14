@@ -127,7 +127,6 @@ public class BoardGameListController {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         FullBoardGameListDto boardGameListDto = new FullBoardGameListDto.Builder(null, null, new HashSet<>()).build();
         boardGameListDto.undoFromMemento(boardGameListDtoMemento);
-        System.out.println(boardGameListDtoMemento.getBoardGames().size());
         BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(boardGameListDto.getId(), principal.getId());
         boardGameListFacade.editBoardGameList(boardGameList, boardGameListDto);
 

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import pollub.myplanszeo.state.BoardGameListActiveState;
 import pollub.myplanszeo.state.BoardGameListState;
+import pollub.myplanszeo.visitor.Visitor;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -63,5 +64,9 @@ public class BoardGameList implements Cloneable {
 
     public void update(){
         this.state.updateState(this);
+    }
+
+    public int accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 }

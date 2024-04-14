@@ -25,7 +25,6 @@ public class FullBoardGameListDto extends BoardGameListDto {
     private FullBoardGameListDto(Builder builder) {
         super(builder.id, builder.name, builder.description, builder.state);
         this.boardGames = builder.boardGames;
-        System.out.println(getState());
     }
 
     public BoardGameListDtoMemento saveToMemento() {

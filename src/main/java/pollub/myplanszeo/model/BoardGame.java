@@ -3,6 +3,7 @@ package pollub.myplanszeo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import pollub.myplanszeo.visitor.Visitor;
 
 import java.util.HashSet;
 import java.util.List;
@@ -47,4 +48,8 @@ public class BoardGame {
     @JsonIgnore
     @OneToMany(mappedBy = "baseGame", fetch = FetchType.EAGER)
     private List<BoardGame> dlcs;
+
+    public int accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
 }

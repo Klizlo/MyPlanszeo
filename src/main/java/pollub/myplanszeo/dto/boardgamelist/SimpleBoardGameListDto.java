@@ -13,7 +13,6 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
     private SimpleBoardGameListDto(Builder builder) {
         super(builder.id, builder.name, builder.description, builder.state);
         this.numberOfGames = builder.numberOfGames;
-        System.out.println(getState());
     }
 
     public static class Builder {
@@ -37,7 +36,6 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
 
         public Builder setState(String state) {
             this.state = state;
-            System.out.println(this.state);
             return this;
         }
 

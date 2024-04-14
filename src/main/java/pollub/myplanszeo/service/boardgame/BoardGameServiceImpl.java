@@ -16,12 +16,12 @@ public class BoardGameServiceImpl implements BoardGameService {
 
     @Override
     public List<BoardGame> getAllBoardGames() {
-        return boardGameRepository.findAll();
+        return boardGameRepository.findAllWithCategory();
     }
 
     @Override
     public BoardGame getBoardGameById(Long id) {
-        return boardGameRepository.findById(id)
+        return boardGameRepository.findByIdWithCategory(id)
                 .orElseThrow(BoardGameNotFoundException::new);
     }
 }
