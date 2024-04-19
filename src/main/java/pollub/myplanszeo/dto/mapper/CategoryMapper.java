@@ -5,6 +5,8 @@ import pollub.myplanszeo.model.Category;
 
 import java.util.List;
 
+//Tydzień 7, Zasada Pojedynczej Odpowiedzialności 3
+//Klasa ma za zadnie zmapować obiekty klasy Category na obiekty klasy CategoryDto
 public class CategoryMapper {
 
     public static List<CategoryDto> mapToDtos(List<Category> categories) {
@@ -19,3 +21,4 @@ public class CategoryMapper {
                 .build();
     }
 }
+//Koniec, Tydzień 7, Zasada Pojedynczej Odpowiedzialności 3

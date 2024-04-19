@@ -6,6 +6,8 @@ import pollub.myplanszeo.model.AgeRestriction;
 
 import java.util.stream.Stream;
 
+//Tydzień 7, Zasada Pojedynczej Odpowiedzialności 1
+//Klasa ma za zadanie przekonwertować String do klasy Enum i na odwrót
 @Converter(autoApply = true)
 public class AgeRestrictionConverter implements AttributeConverter<AgeRestriction, String> {
     @Override
@@ -28,3 +30,4 @@ public class AgeRestrictionConverter implements AttributeConverter<AgeRestrictio
                 .orElseThrow(IllegalArgumentException::new);
     }
 }
+//Koniec, Tydzień 7, Zasada Pojedynczej Odpowiedzialności 1
