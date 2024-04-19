@@ -5,6 +5,8 @@ import pollub.myplanszeo.model.BoardGameList;
 
 import java.util.List;
 
+//Tydzień 7, Zasada Otwarty/Zamknięty 3
+//Interfejs dla klas serwisowych do zarządzania listami gier planszowych
 public interface BoardGameListService {
 
     List<BoardGameList> getAllBoardGameListByUserId(Long userId);
@@ -17,3 +19,4 @@ public interface BoardGameListService {
 
     boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId);
 }
+//Koniec, Tydzień 7, Zasada Otwarty/Zamknięty 3

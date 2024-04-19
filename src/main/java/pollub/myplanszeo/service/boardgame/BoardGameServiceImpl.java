@@ -8,6 +8,8 @@ import pollub.myplanszeo.repository.BoardGameRepository;
 
 import java.util.List;
 
+//Tydzień 7, Zasada Otwarty/Zamknięty 1
+//Klasa implementująca interfejs BoardGameService
 @Service
 @RequiredArgsConstructor
 public class BoardGameServiceImpl implements BoardGameService {
@@ -25,3 +27,4 @@ public class BoardGameServiceImpl implements BoardGameService {
                 .orElseThrow(BoardGameNotFoundException::new);
     }
 }
+//Koniec, Tydzień 7, Zasada Otwarty/Zamknięty 1

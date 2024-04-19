@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 
 //Tydzień 6, Wzorzec Observer 1
 //Implementuje interfejs Observable, ma za zadnie poinformowanie obserwatorów, gdy lista gier zostanie zeedytowana
+//Tydzień 7, Zasada Otwarty/Zamknięty 3
+//Klasa implementująca interfejs BoardGameListService
 public class BoardGameListServiceImpl implements BoardGameListService, Observable {
 
     @Autowired
@@ -128,3 +130,5 @@ public void changeBoardGameListState(Long boardGameListId, Long userId) {}
         }
     }
 }
+//Koniec, Tydzień 7, Zasada Otwarty/Zamknięty 3
+//Koniec, Tydzień 6, Wzorzec Observer 1

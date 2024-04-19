@@ -3,6 +3,7 @@ package pollub.myplanszeo.service.file;
 import org.springframework.http.HttpHeaders;
 import pollub.myplanszeo.model.BoardGameList;
 
+
 public interface FileService {
 
     byte[] getBoardGameList(BoardGameList boardGameList, FileType fileType);

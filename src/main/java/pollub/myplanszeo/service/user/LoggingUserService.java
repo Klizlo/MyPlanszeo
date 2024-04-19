@@ -7,6 +7,8 @@ import pollub.myplanszeo.model.User;
 
 //Tydzień 3, Wzorzec Decorator 1
 //Klasa ta ma za zadanie logowanie czy użytkownik poprawnie zalogował się do serwisu
+//Tydzień 7, Zasada Otwarty/Zamknięty 2
+//Klasa implmentująca interfejs UserService
 @RequiredArgsConstructor
 @Slf4j
 public class LoggingUserService implements UserService {
@@ -25,4 +27,5 @@ public class LoggingUserService implements UserService {
         return added;
     }
 }
+//Koniec, Tydzień 7, Zasada Otwarty/Zamknięty 2
 //Koniec, Tydzień 3, Wzorzec Decorator
