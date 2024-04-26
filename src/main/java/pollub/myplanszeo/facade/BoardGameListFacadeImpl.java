@@ -1,6 +1,8 @@
 package pollub.myplanszeo.facade;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
@@ -15,7 +17,10 @@ import java.util.List;
 public class BoardGameListFacadeImpl implements BoardGameListFacade {
 
     private final BoardGameListService boardGameListService;
-    private final FileService fileService;
+    @Autowired
+    @Qualifier("FileService")
+//    @Qualifier("LoggingFileService")
+    private FileService fileService;
 
     @Override
     public List<BoardGameList> getAllBoardGameListsByUserId(Long userId) {

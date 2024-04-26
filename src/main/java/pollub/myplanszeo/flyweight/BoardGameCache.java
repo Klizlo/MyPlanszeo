@@ -1,6 +1,8 @@
 package pollub.myplanszeo.flyweight;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.service.boardgame.BoardGameService;
@@ -17,7 +19,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BoardGameCache {
 
-    private final BoardGameService boardGameService;
+    @Autowired
+//    @Qualifier("BoardGameService")
+    @Qualifier("LoggingBoardGameService")
+    private BoardGameService boardGameService;
     private static final Map<Long, BoardGame> longBoardGames = new HashMap<>();
 
     public List<BoardGame> getAllBoardGames() {

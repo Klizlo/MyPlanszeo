@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListService;
 import pollub.myplanszeo.service.boardgamelist.BoardGameListServiceImpl;
+import pollub.myplanszeo.service.boardgamelist.LoggingBoardGameListService;
 import pollub.myplanszeo.service.user.UserService;
 import pollub.myplanszeo.service.user.UserServiceImpl;
 
@@ -20,9 +21,14 @@ public class BeanConfig {
         return new UserServiceDecoratorBeanProcessor();
     }
 
+//    @Bean
+//    public BoardGameListService boardGameListServiceDelegate() {
+//        return new BoardGameListServiceImpl();
+//    }
+
     @Bean
     public BoardGameListService boardGameListServiceDelegate() {
-        return new BoardGameListServiceImpl();
+        return new LoggingBoardGameListService();
     }
 
     @Bean
