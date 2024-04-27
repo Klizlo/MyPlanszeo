@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
 import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
-import pollub.myplanszeo.flyweight.BoardGameCache;
+import pollub.myplanszeo.flyweight.AbstractBoardGameCache;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
@@ -25,7 +25,7 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     @Autowired
     private UserService userService;
     @Autowired
-    private BoardGameCache boardGameCache;
+    private AbstractBoardGameCache boardGameCache;
     @Autowired
     private List<NotificationService> notificationServices;
 

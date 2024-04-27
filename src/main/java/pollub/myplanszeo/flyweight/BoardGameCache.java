@@ -1,11 +1,7 @@
 package pollub.myplanszeo.flyweight;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import pollub.myplanszeo.model.BoardGame;
-import pollub.myplanszeo.service.boardgame.BoardGameService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,18 +12,14 @@ import java.util.Map;
 //Klasa ta jest cachem dla gier planszowych dostępnym w serwisie
 //Pozwala to na zmniejszenie zapytań do bazy danych oraz na skrócenie czasu w jakim klient otrzyma żądanie
 @Component
-@RequiredArgsConstructor
-public class BoardGameCache {
+public class BoardGameCache extends AbstractBoardGameCache {
 
-    @Autowired
-//    @Qualifier("BoardGameService")
-    @Qualifier("LoggingBoardGameService")
-    private BoardGameService boardGameService;
     private static final Map<Long, BoardGame> longBoardGames = new HashMap<>();
 
+    @Override
     public List<BoardGame> getAllBoardGames() {
         if (longBoardGames.isEmpty()) {
-            List<BoardGame> boardGames = boardGameService.getAllBoardGames();
+            List<BoardGame> boardGames = getBoardGameService().getAllBoardGames();
             for (BoardGame boardGame : boardGames) {
                 longBoardGames.put(boardGame.getId(), boardGame);
             }
@@ -35,10 +27,11 @@ public class BoardGameCache {
         return longBoardGames.values().stream().toList();
     }
 
+    @Override
     public BoardGame getBoardGameById(Long id) {
         BoardGame boardGame = longBoardGames.get(id);
         if (boardGame == null) {
-            boardGame = boardGameService.getBoardGameById(id);
+            boardGame = getBoardGameService().getBoardGameById(id);
             longBoardGames.put(id, boardGame);
         }
         return boardGame;

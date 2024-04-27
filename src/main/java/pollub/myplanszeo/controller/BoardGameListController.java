@@ -19,7 +19,6 @@ import pollub.myplanszeo.memento.BoardGameListDtoMemento;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.service.file.FileService;
 import pollub.myplanszeo.state.BoardGameListEditState;
-import pollub.myplanszeo.state.BoardGameListState;
 
 import java.util.HashSet;
 import java.util.List;

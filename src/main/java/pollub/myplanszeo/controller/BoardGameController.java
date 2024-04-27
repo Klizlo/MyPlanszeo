@@ -11,7 +11,7 @@ import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
 import pollub.myplanszeo.dto.mapper.*;
 import pollub.myplanszeo.facade.BoardGameListFacade;
-import pollub.myplanszeo.flyweight.BoardGameCache;
+import pollub.myplanszeo.flyweight.AbstractBoardGameCache;
 import pollub.myplanszeo.interpreter.BoardGameInterpreter;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardGameController {
 
-    private final BoardGameCache boardGameCache;
+    private final AbstractBoardGameCache boardGameCache;
     private BoardGameMapper boardGameMapper;
     private final BoardGameListFacade boardGameListFacade;
 

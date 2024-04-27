@@ -1,6 +1,5 @@
 package pollub.myplanszeo.bridge;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import pollub.myplanszeo.model.BoardGameList;
 
 //Tydzień 3, Wzorzec Bridge 1
