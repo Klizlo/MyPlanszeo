@@ -1,6 +1,5 @@
 package pollub.myplanszeo.bridge;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import pollub.myplanszeo.model.BoardGameList;
 
 //Tydzień 3, Wzorzec Bridge 1
@@ -8,7 +7,7 @@ import pollub.myplanszeo.model.BoardGameList;
 //Pozwala to na zapisanie listy gier na tablicę bajtów w zależności od tego w jakiej postaci chcemy te dane zapisać (JSON, XML, CSV)
 public interface HttpFileProcessor {
 
-    public byte[] getAsFile(BoardGameList boardGameList);
+    byte[] getAsFile(BoardGameList boardGameList);
 
 }
 //Koniec, Tydzień 3, Wzorzec Bridge 1

@@ -12,7 +12,7 @@ import pollub.myplanszeo.config.security.CustomUserDetails;
 import pollub.myplanszeo.dto.boardgamelist.BoardGameListDto;
 import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
 import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
-import pollub.myplanszeo.dto.mapper.BoardGameListMapper;
+import pollub.myplanszeo.dto.mapper.BoardGameListMapperImpl;
 import pollub.myplanszeo.facade.BoardGameListFacade;
 import pollub.myplanszeo.memento.BoardGameListCaretaker;
 import pollub.myplanszeo.memento.BoardGameListDtoMemento;
@@ -32,7 +32,7 @@ public class BoardGameListController {
     @GetMapping("/boardgamelists")
     public String getAllBoardGameLists(Model model, Authentication authentication) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-        List<BoardGameListDto> boardGameListDtos = BoardGameListMapper
+        List<BoardGameListDto> boardGameListDtos = BoardGameListMapperImpl
                 .mapToDtos(boardGameListFacade.getAllBoardGameListsByUserId(principal.getId()),
                         BoardGameListFactory.BoardGameListType.Simple);
         model.addAttribute("lists", boardGameListDtos);
@@ -44,14 +44,14 @@ public class BoardGameListController {
     public String getBoardGameList(@PathVariable Long id, Model model, Authentication authentication) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         BoardGameList boardGameList = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
-        model.addAttribute("list", BoardGameListMapper.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
+        model.addAttribute("list", BoardGameListMapperImpl.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
         return "boardgamelist/boardgamelist";
     }
 
     @GetMapping("/boardgamelists/modal/game/{id}")
     public String getBoardGameListModal(@PathVariable Long gameId, Model model, Authentication authentication) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-        List<BoardGameListDto> boardGameListDtos = BoardGameListMapper
+        List<BoardGameListDto> boardGameListDtos = BoardGameListMapperImpl
                 .mapToDtos(boardGameListFacade.getAllBoardGameListsByUserId(principal.getId()),
                         BoardGameListFactory.BoardGameListType.Simple);
         model.addAttribute("lists", boardGameListDtos);
@@ -90,7 +90,7 @@ public class BoardGameListController {
             return "boardgamelist/boardgamelists";
         }
         boardGameList.setState(BoardGameListEditState.instance());
-        model.addAttribute("list", (FullBoardGameListDto) BoardGameListMapper.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
+        model.addAttribute("list", (FullBoardGameListDto) BoardGameListMapperImpl.mapToDto(boardGameList, BoardGameListFactory.BoardGameListType.Full));
 
         return "boardgamelist/update_boardgamelist_form";
     }
@@ -108,14 +108,14 @@ public class BoardGameListController {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         BoardGameListCaretaker boardGameListCaretaker = new BoardGameListCaretaker();
         BoardGameList boardGameListToEdit = boardGameListFacade.getBoardGameListByIdAndUserId(id, principal.getId());
-        boardGameListCaretaker.addMemento(((FullBoardGameListDto)BoardGameListMapper.mapToDto(boardGameListToEdit, BoardGameListFactory.BoardGameListType.Full)).saveToMemento());
+        boardGameListCaretaker.addMemento(((FullBoardGameListDto) BoardGameListMapperImpl.mapToDto(boardGameListToEdit, BoardGameListFactory.BoardGameListType.Full)).saveToMemento());
         model.addAttribute("caretaker", boardGameListCaretaker);
         BoardGameListDtoMemento lastMemento = boardGameListCaretaker.getLastMemento();
         model.addAttribute("memento", lastMemento);
 
         boardGameListFacade.editBoardGameList(boardGameListToEdit, boardGameList);
 
-        model.addAttribute("lists", BoardGameListMapper
+        model.addAttribute("lists", BoardGameListMapperImpl
                 .mapToDtos(boardGameListFacade.getAllBoardGameListsByUserId(principal.getId()),
                         BoardGameListFactory.BoardGameListType.Simple));
         return "boardgamelist/boardgamelists";

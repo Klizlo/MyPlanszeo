@@ -5,20 +5,8 @@ import pollub.myplanszeo.model.Category;
 
 import java.util.List;
 
-//Tydzień 7, Zasada Pojedynczej Odpowiedzialności 3
-//Klasa ma za zadnie zmapować obiekty klasy Category na obiekty klasy CategoryDto
-public class CategoryMapper {
+public interface CategoryMapper {
 
-    public static List<CategoryDto> mapToDtos(List<Category> categories) {
-        return categories.stream()
-                .map(CategoryMapper::mapToDto)
-                .toList();
-    }
-
-    public static CategoryDto mapToDto(Category category) {
-        return new CategoryDto
-                .Builder(category.getId(), category.getName())
-                .build();
-    }
+    List<CategoryDto> mapToCategoryDtos(List<Category> categories);
+    CategoryDto mapToCategoryDto(Category category);
 }
-//Koniec, Tydzień 7, Zasada Pojedynczej Odpowiedzialności 3

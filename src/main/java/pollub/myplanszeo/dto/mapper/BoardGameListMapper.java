@@ -6,15 +6,8 @@ import pollub.myplanszeo.model.BoardGameList;
 
 import java.util.List;
 
-public class BoardGameListMapper {
+public interface BoardGameListMapper {
 
-    public static List<BoardGameListDto> mapToDtos(List<BoardGameList> boardGameLists, BoardGameListFactory.BoardGameListType type) {
-        return boardGameLists.stream()
-                .map(boardGameList -> mapToDto(boardGameList, type))
-                .toList();
-    }
-
-    public static BoardGameListDto mapToDto(BoardGameList boardGameList, BoardGameListFactory.BoardGameListType type) {
-        return BoardGameListFactory.getBoardGameList(boardGameList, type);
-    }
+    List<BoardGameListDto> mapToBoardGameListDtos(List<BoardGameList> boardGameList, BoardGameListFactory.BoardGameListType type);
+    BoardGameListDto mapToBoardGameListDto(BoardGameList boardGameList, BoardGameListFactory.BoardGameListType type);
 }

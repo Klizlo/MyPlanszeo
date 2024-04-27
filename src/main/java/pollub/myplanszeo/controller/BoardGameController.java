@@ -36,7 +36,7 @@ public class BoardGameController {
         BoardGameInterpreter interpreter = new BoardGameInterpreter(boardGames);
         boardGameMapper = new SimpleBoardGameMapper();
         model.addAttribute("games", boardGameMapper.mapToDtos(interpreter.interpret(params)));
-        model.addAttribute("categories", CategoryMapper.mapToDtos(boardGames
+        model.addAttribute("categories", CategoryMapperImpl.mapToDtos(boardGames
                 .stream()
                 .map(BoardGame::getCategory)
                 .distinct()
@@ -64,7 +64,7 @@ public class BoardGameController {
     private void getUserBoardGameListsWhenIsAuthenticated(Long id, Model model, Authentication authentication) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         List<BoardGameList> boardGameLists = boardGameListFacade.getAllBoardGameListsByUserId(principal.getId());
-        model.addAttribute("lists", BoardGameListMapper.mapToDtos(boardGameLists, BoardGameListFactory.BoardGameListType.Simple));
+        model.addAttribute("lists", BoardGameListMapperImpl.mapToDtos(boardGameLists, BoardGameListFactory.BoardGameListType.Simple));
         List<Long> listsWithGivenGame = boardGameLists.stream()
                 .filter(boardGameList -> boardGameList.getBoardGames()
                         .stream()
