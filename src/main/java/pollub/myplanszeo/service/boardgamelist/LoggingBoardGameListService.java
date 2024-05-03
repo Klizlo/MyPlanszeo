@@ -60,15 +60,15 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     }
 
     @Override
-    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
+    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selectedLists, Long userId) {
 
-        log.warn("Modify board games lists: {}", selected.stream().map(id -> Long.toString(id)).collect(Collectors.joining(", ")));
+        log.warn("Modify board games lists: {}", selectedLists.stream().map(id -> Long.toString(id)).collect(Collectors.joining(", ")));
 
         List<BoardGameList> gameLists = getAllBoardGameListByUserId(userId);
         BoardGame boardGame = boardGameCache.getBoardGameById(gameId);
 
         List<BoardGameList> boardGameListsToAddGame = gameLists.stream()
-                .filter(boardGameList -> selected.contains(boardGameList.getId())
+                .filter(boardGameList -> selectedLists.contains(boardGameList.getId())
                         && !boardGameList.getBoardGames().contains(boardGame))
                 .toList();
 
@@ -122,9 +122,6 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
                 .create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_LIST, boardGameListId)
                 .execute();
     }
-
-    @Override
-    public void changeBoardGameListState(Long boardGameListId, Long userId) {}
 
     @Override
     public boolean existsBoardGameListByIdAndUserId(Long boardGameListId, Long userId) {

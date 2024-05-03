@@ -1,5 +1,6 @@
 package pollub.myplanszeo.visitor;
 
+import pollub.myplanszeo.functional.Counter;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
 
@@ -8,19 +9,26 @@ import pollub.myplanszeo.model.BoardGameList;
 //oraz który ma za zadanie zliczyć liczbę gier znajdujących się na liście
 public class OccurrenceCounterVisitor implements Visitor{
     @Override
-    public int visit(BoardGame boardGame) {
-        return (int) boardGame
+    public long visit(BoardGame boardGame) {
+        return count(() -> boardGame
                 .getBoardGameLists()
                 .stream().map(BoardGameList::getUser)
                 .distinct()
-                .count();
+                .count());
     }
 
     @Override
-    public int visit(BoardGameList boardGameList) {
-        return boardGameList
+    public long visit(BoardGameList boardGameList) {
+        return count(() -> boardGameList
                 .getBoardGames()
-                .size();
+                .size());
     }
+
+    //Tydzień 10, programowanie funkcyjne 3
+    //Wykorzystanie interfejsu funkcyjnego do policzenia wystąpień
+    private long count(Counter counter) {
+        return counter.count();
+    }
+    //Koniec, Tydzień 10, programowanie funkcyjne 3
 }
 //Koniec, Tydzień 6, Wzorzec Visitor 1

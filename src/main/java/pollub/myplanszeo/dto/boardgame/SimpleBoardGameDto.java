@@ -2,6 +2,7 @@ package pollub.myplanszeo.dto.boardgame;
 
 import lombok.*;
 import pollub.myplanszeo.dto.category.CategoryDto;
+import pollub.myplanszeo.dto.mapper.CategoryMapperImpl;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.Category;
 
@@ -57,8 +58,7 @@ public class SimpleBoardGameDto extends BoardGameDto {
             this.id = id;
             this.name = name;
             this.producer = producer;
-            this.category = new CategoryDto.Builder(category.getId(), category.getName())
-                    .build();
+            this.category = CategoryMapperImpl.mapToDto(category);
         }
 
         public Builder setAgeRestriction(AgeRestriction ageRestriction) {

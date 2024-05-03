@@ -7,8 +7,8 @@ import pollub.myplanszeo.model.BoardGameList;
 //Iterfejs Visitor, który odwiedza listy gier planszowych i same gry planszowe
 public interface Visitor {
 
-    int visit(BoardGame boardGame);
-    int visit(BoardGameList boardGameList);
+    long visit(BoardGame boardGame);
+    long visit(BoardGameList boardGameList);
 
 }
 //Koniec, Tydzień 6, Wzorzec Visitor 1

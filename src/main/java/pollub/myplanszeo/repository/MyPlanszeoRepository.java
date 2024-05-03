@@ -9,7 +9,7 @@ import pollub.myplanszeo.model.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface MyPlanszeoRepository extends JpaRepository<Object, Long> {
+public interface MyPlanszeoRepository {
 
     @Query("select b from BoardGameList b where b.user.id=?1")
     List<BoardGameList> findAllByUser_Id(Long userId);

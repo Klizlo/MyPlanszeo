@@ -1,6 +1,7 @@
 package pollub.myplanszeo.interpreter;
 
 import lombok.AllArgsConstructor;
+import pollub.myplanszeo.functional.BoardGameFilter;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.ArrayList;
@@ -26,8 +27,12 @@ public class BoardGameInterpreter {
         if (Arrays.stream(split).anyMatch(param -> param.contains("category"))) {
             String category = Arrays.stream(split)
                     .filter(param -> param.contains("category"))
-                    .findFirst().get().substring(9);
-            expressions.add(new CategoryExpression(category));
+                    .findFirst().orElseGet(() -> "").substring(9);
+            expressions.add(
+                    new CategoryExpression(boardGame -> boardGame
+                            .getCategory()
+                            .getName()
+                            .equals(category)));
         }
         if (Arrays.stream(split).anyMatch(param -> param.contains("min") || param.contains("max"))) {
             int min = Integer.parseInt(Arrays.stream(split)
@@ -36,13 +41,16 @@ public class BoardGameInterpreter {
             int max = Integer.parseInt(Arrays.stream(split)
                     .filter(param -> param.contains("max"))
                     .findFirst().orElse("max=0").substring(4));
-            expressions.add(new NumberOfPlayersExpression(min, max));
+            expressions.add(new NumberOfPlayersExpression(boardGame -> boardGame.getMinNumOfPlayers() >= min
+                    || boardGame.getMaxNumOfPlayers() <= max));
         }
         if (Arrays.stream(split).anyMatch(param -> param.contains("producer"))) {
             String producer = Arrays.stream(split)
                     .filter(param -> param.contains("producer"))
-                    .findFirst().get().substring(9);
-            expressions.add(new ProducerExpression(producer));
+                    .findFirst().orElseGet(() -> "").substring(9);
+            expressions.add(new ProducerExpression(boardGame -> boardGame
+                    .getProducer()
+                    .equals(producer)));
         }
         for (BoardGameExpression expression : expressions) {
             boardGames = expression.interpret(boardGames);

@@ -2,6 +2,9 @@ package pollub.myplanszeo.dto.boardgame;
 
 import lombok.Getter;
 import pollub.myplanszeo.dto.category.CategoryDto;
+import pollub.myplanszeo.dto.mapper.BoardGameMapper;
+import pollub.myplanszeo.dto.mapper.CategoryMapperImpl;
+import pollub.myplanszeo.dto.mapper.SimpleBoardGameMapper;
 import pollub.myplanszeo.model.AgeRestriction;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameIterator;
@@ -22,7 +25,7 @@ import java.util.List;
 public class BaseBoardGameDto extends BoardGameDto {
 
     private List<BoardGameDto> expansions;
-    private Integer occurrence;
+    private Long occurrence;
 
     private BaseBoardGameDto(Builder builder) {
         super(
@@ -49,26 +52,20 @@ public class BaseBoardGameDto extends BoardGameDto {
         private Integer maxNumOfPlayers;
         private CategoryDto category;
         private List<BoardGameDto> expansions;
-        private Integer occurrence;
+        private Long occurrence;
 
         public Builder(Long id, String name, String producer, Category category, List<BoardGame> expansions) {
             this.id = id;
             this.name = name;
             this.producer = producer;
-            this.category = new CategoryDto.Builder(category.getId(), category.getName())
-                    .build();
+            this.category = CategoryMapperImpl.mapToDto(category);
+            BoardGameMapper mapper = new SimpleBoardGameMapper();
             if (expansions != null) {
                 this.expansions = new ArrayList<>();
                 Iterator<BoardGame> iterator = new BoardGameIterator(expansions);
                 while (iterator.hasNext()) {
                     BoardGame expansion = iterator.next();
-                    this.expansions.add(
-                            new SimpleBoardGameDto.Builder(expansion.getId(), expansion.getName(), expansion.getProducer(), expansion.getCategory())
-                            .setAgeRestriction(expansion.getAgeRestriction())
-                            .setDescription(expansion.getDescription())
-                            .setMinNumOfPlayers(expansion.getMinNumOfPlayers())
-                            .setMaxNumOfPlayers(expansion.getMaxNumOfPlayers())
-                            .build());
+                    this.expansions.add(mapper.mapToDto(expansion));
                 }
             }
         }
@@ -93,7 +90,7 @@ public class BaseBoardGameDto extends BoardGameDto {
             return this;
         }
 
-        public BaseBoardGameDto.Builder setOccurrence(Integer occurrence) {
+        public BaseBoardGameDto.Builder setOccurrence(Long occurrence) {
             this.occurrence = occurrence;
             return this;
         }

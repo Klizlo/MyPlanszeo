@@ -49,7 +49,7 @@ public class BoardGame {
     @OneToMany(mappedBy = "baseGame", fetch = FetchType.EAGER)
     private List<BoardGame> dlcs;
 
-    public int accept(Visitor visitor) {
+    public long accept(Visitor visitor) {
         return visitor.visit(this);
     }
 }

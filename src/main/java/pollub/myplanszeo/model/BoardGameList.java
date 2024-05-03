@@ -66,7 +66,7 @@ public class BoardGameList implements Cloneable {
         this.state.updateState(this);
     }
 
-    public int accept(Visitor visitor) {
+    public long accept(Visitor visitor) {
         return visitor.visit(this);
     }
 }

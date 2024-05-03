@@ -1,6 +1,7 @@
 package pollub.myplanszeo.interpreter;
 
 import lombok.RequiredArgsConstructor;
+import pollub.myplanszeo.functional.BoardGameFilter;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.List;
@@ -11,15 +12,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryExpression implements BoardGameExpression{
 
-    private final String categoryName;
+    private final BoardGameFilter filter;
 
+    //Tydzień 10, programowanie funkcyjne 1
+    //Wykorzystanie filtru do filtracji danych w strumieniu danych
     @Override
     public List<BoardGame> interpret(List<BoardGame> boardGames) {
         return boardGames.stream()
-                .filter(boardGame -> boardGame
-                        .getCategory()
-                        .getName().equals(categoryName))
+                .filter(filter::filter)
                 .toList();
     }
+    //Koniec, Tydzień 10, programowanie funkcyjne 1
 }
 //Koniec, Tydzień 5, Wzorzec Interpreter 1

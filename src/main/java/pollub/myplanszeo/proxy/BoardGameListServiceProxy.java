@@ -38,11 +38,11 @@ public class BoardGameListServiceProxy implements BoardGameListService {
     }
 
     @Override
-    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
-        if (selected == null) {
-            selected = new ArrayList<Long>();
+    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selectedLists, Long userId) {
+        if (selectedLists == null) {
+            selectedLists = new ArrayList<Long>();
         }
-        return boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
+        return boardGameListService.modifyBoardGameInBoardGameLists(gameId, selectedLists, userId);
     }
 
     @Override

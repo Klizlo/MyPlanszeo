@@ -12,6 +12,7 @@ import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
 import pollub.myplanszeo.dto.mapper.*;
 import pollub.myplanszeo.facade.BoardGameListFacade;
 import pollub.myplanszeo.flyweight.AbstractBoardGameCache;
+import pollub.myplanszeo.functional.BoardGameListFilter;
 import pollub.myplanszeo.interpreter.BoardGameInterpreter;
 import pollub.myplanszeo.model.BoardGame;
 import pollub.myplanszeo.model.BoardGameList;
@@ -65,11 +66,12 @@ public class BoardGameController {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
         List<BoardGameList> boardGameLists = boardGameListFacade.getAllBoardGameListsByUserId(principal.getId());
         model.addAttribute("lists", BoardGameListMapperImpl.mapToDtos(boardGameLists, BoardGameListFactory.BoardGameListType.Simple));
+        BoardGameListFilter filter = boardGameList -> boardGameList.getBoardGames()
+                .stream()
+                .map(BoardGame::getId)
+                .anyMatch(gameId -> gameId.equals(id));
         List<Long> listsWithGivenGame = boardGameLists.stream()
-                .filter(boardGameList -> boardGameList.getBoardGames()
-                        .stream()
-                        .map(BoardGame::getId)
-                        .anyMatch(gameId -> gameId.equals(id)))
+                .filter(filter::filter)
                 .map(BoardGameList::getId)
                 .toList();
         model.addAttribute("listsWithGivenGame", listsWithGivenGame);

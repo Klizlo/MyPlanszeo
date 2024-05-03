@@ -76,9 +76,9 @@ public class BoardGameListController {
     }
 
     @PostMapping("/boardgamelists/add_game/{gameId}")
-    public String addBoardGameToLists(@PathVariable Long gameId, @RequestParam(value = "lists", required = false) List<Long> selected, Authentication authentication, HttpServletRequest request) {
+    public String addBoardGameToLists(@PathVariable Long gameId, @RequestParam(value = "selectedLists", required = false) List<Long> selectedLists, Authentication authentication, HttpServletRequest request) {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-        boardGameListFacade.modifyBoardGameInBoardGameLists(gameId, selected, principal.getId());
+        boardGameListFacade.modifyBoardGameInBoardGameLists(gameId, selectedLists, principal.getId());
         return "redirect:" + request.getHeader("Referer");
     }
 

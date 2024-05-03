@@ -47,8 +47,8 @@ public class BoardGameListCache implements BoardGameListService {
     }
 
     @Override
-    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selected, Long userId) {
-        List<BoardGameList> boardGameLists = boardGameListService.modifyBoardGameInBoardGameLists(gameId, selected, userId);
+    public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selectedLists, Long userId) {
+        List<BoardGameList> boardGameLists = boardGameListService.modifyBoardGameInBoardGameLists(gameId, selectedLists, userId);
         for (BoardGameList boardGameList : boardGameLists) {
             boardGameListCache.put(boardGameList.getId(), boardGameList);
         }
