@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class SimpleBoardGameListDto extends BoardGameListDto {
 
-    private Integer numberOfGames;
+    private Long numberOfGames;
 
     private SimpleBoardGameListDto(Builder builder) {
         super(builder.id, builder.name, builder.description, builder.state);
@@ -21,9 +21,9 @@ public class SimpleBoardGameListDto extends BoardGameListDto {
         private String name;
         private String description;
         private String state;
-        private Integer numberOfGames;
+        private Long numberOfGames;
 
-        public Builder(Long id, String name, Integer numberOfGames) {
+        public Builder(Long id, String name, Long numberOfGames) {
             this.id = id;
             this.name = name;
             this.numberOfGames = numberOfGames;
