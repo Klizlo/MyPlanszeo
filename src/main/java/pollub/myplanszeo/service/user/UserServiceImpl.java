@@ -2,6 +2,7 @@ package pollub.myplanszeo.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import pollub.myplanszeo.model.User;
 import pollub.myplanszeo.repository.UserRepository;
 
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);

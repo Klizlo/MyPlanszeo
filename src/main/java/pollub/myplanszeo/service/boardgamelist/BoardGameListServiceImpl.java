@@ -1,6 +1,7 @@
 package pollub.myplanszeo.service.boardgamelist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
 import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
@@ -47,6 +48,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
+    @Transactional
     public BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId) {
         User user = userService.getUserById(userId);
         boardGameList.setUser(user);
@@ -58,6 +60,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
+    @Transactional
     public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selectedLists, Long userId) {
         List<BoardGameList> gameLists = getAllBoardGameListByUserId(userId);
         BoardGame boardGame = boardGameCache.getBoardGameById(gameId);
@@ -98,6 +101,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
+    @Transactional
     public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
         if (boardGameList.getBoardGames() != null && boardGameList.getBoardGames().size() > boardGameListToEdit.getBoardGames().size()) {
             addBoardGamesToBoardGameList(boardGameListToEdit, boardGameList);
@@ -143,6 +147,7 @@ public class BoardGameListServiceImpl implements BoardGameListService, Observabl
     }
 
     @Override
+    @Transactional
     public void removeBoardGameList(Long boardGameListId, Long userId) {
         commandFactory
                 .create(BoardGameListCommand.CommandType.REMOVE_BOARD_GAME_LIST, boardGameListId)

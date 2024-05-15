@@ -2,6 +2,7 @@ package pollub.myplanszeo.service.boardgamelist;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommand;
 import pollub.myplanszeo.command.boardgamelist.BoardGameListCommandFactory;
 import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
@@ -46,6 +47,7 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     }
 
     @Override
+    @Transactional
     public BoardGameList addBoardGameList(BoardGameList boardGameList, Long userId) {
 
         log.warn("Add board games list: {}", boardGameList.getName());
@@ -60,6 +62,7 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     }
 
     @Override
+    @Transactional
     public List<BoardGameList> modifyBoardGameInBoardGameLists(Long gameId, List<Long> selectedLists, Long userId) {
 
         log.warn("Modify board games lists: {}", selectedLists.stream().map(id -> Long.toString(id)).collect(Collectors.joining(", ")));
@@ -87,6 +90,7 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     }
 
     @Override
+    @Transactional
     public BoardGameList editBoardGameList(BoardGameList boardGameListToEdit, FullBoardGameListDto boardGameList) {
         log.warn("Editing board game list: {}", boardGameListToEdit.getId());
 
@@ -116,6 +120,7 @@ public class LoggingBoardGameListService implements BoardGameListService, Observ
     }
 
     @Override
+    @Transactional
     public void removeBoardGameList(Long boardGameListId, Long userId) {
         log.warn("Removing board game list: {}", boardGameListId);
         commandFactory
