@@ -59,7 +59,7 @@ public class BuilderTest {
 
         BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), boardGames, new User(1L, "adam.nowak@poczta.pl", "AFabcabcbahucyba", null));
 
-        SimpleBoardGameListDto simpleBoardGameList = new SimpleBoardGameListDto.Builder(boardGameList.getId(), boardGameList.getName(), boardGameList.getBoardGames().size())
+        SimpleBoardGameListDto simpleBoardGameList = new SimpleBoardGameListDto.Builder(boardGameList.getId(), boardGameList.getName(), (long) boardGameList.getBoardGames().size())
                 .setDescription(boardGameList.getDescription())
                 .build();
 

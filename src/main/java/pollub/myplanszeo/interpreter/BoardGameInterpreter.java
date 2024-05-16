@@ -27,7 +27,7 @@ public class BoardGameInterpreter {
         if (Arrays.stream(split).anyMatch(param -> param.contains("category"))) {
             String category = Arrays.stream(split)
                     .filter(param -> param.contains("category"))
-                    .findFirst().orElseGet(() -> "").substring(9);
+                    .findFirst().orElse("").substring(9);
             expressions.add(
                     new CategoryExpression(boardGame -> boardGame
                             .getCategory()
@@ -41,13 +41,13 @@ public class BoardGameInterpreter {
             int max = Integer.parseInt(Arrays.stream(split)
                     .filter(param -> param.contains("max"))
                     .findFirst().orElse("max=0").substring(4));
-            expressions.add(new NumberOfPlayersExpression(boardGame -> boardGame.getMinNumOfPlayers() >= min
-                    || boardGame.getMaxNumOfPlayers() <= max));
+            expressions.add(new NumberOfPlayersExpression(boardGame -> (min == 0 || min >= boardGame.getMinNumOfPlayers())
+                    && (max <= 0 || max <= boardGame.getMaxNumOfPlayers())));
         }
         if (Arrays.stream(split).anyMatch(param -> param.contains("producer"))) {
             String producer = Arrays.stream(split)
                     .filter(param -> param.contains("producer"))
-                    .findFirst().orElseGet(() -> "").substring(9);
+                    .findFirst().orElse("").substring(9);
             expressions.add(new ProducerExpression(boardGame -> boardGame
                     .getProducer()
                     .equals(producer)));

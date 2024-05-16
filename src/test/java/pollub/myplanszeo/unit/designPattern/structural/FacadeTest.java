@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pollub.myplanszeo.adapter.FileAdapter;
 import pollub.myplanszeo.adapter.FileAdapterImpl;
+import pollub.myplanszeo.dto.boardgamelist.BoardGameListFactory;
+import pollub.myplanszeo.dto.boardgamelist.FullBoardGameListDto;
 import pollub.myplanszeo.facade.BoardGameListFacadeImpl;
 import pollub.myplanszeo.model.BoardGameList;
 import pollub.myplanszeo.model.User;
@@ -19,9 +21,11 @@ import pollub.myplanszeo.state.BoardGameListActiveState;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,6 +69,34 @@ public class FacadeTest {
         BoardGameList boardGameListFromFacade = boardGameListFacade.getBoardGameListByIdAndUserId(1L, 1L);
 
         assertThat(boardGameListFromFacade).isEqualTo(boardGameList);
+    }
+
+    @Test
+    public void givenBoardGameListAndUserId_whenAddBoardGameList_returnBoardGameList() {
+        User user = new User(1L, "adam.nowak@poczta.pl", "Adqu28qtyubahhj1!?q", new ArrayList<>());
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "",BoardGameListActiveState.instance(),  null, user);
+        user.getBoardGameLists().add(boardGameList);
+
+        when(boardGameListService.addBoardGameList(boardGameList, user.getId()))
+                .thenReturn(boardGameList);
+
+        BoardGameList addedBoardGameList = boardGameListFacade.addBoardGameList(boardGameList, user.getId());
+        assertThat(addedBoardGameList).isEqualTo(boardGameList);
+    }
+
+    @Test
+    public void givenBoardGameListAndFullBoardGameListDto_whenEditBoardGameList_thenReturnBoardGameList() {
+        BoardGameList boardGameList = new BoardGameList(1L, "Favorite", "", BoardGameListActiveState.instance(), new HashSet<>(), null);
+        FullBoardGameListDto fullBoardGameListDto = (FullBoardGameListDto) BoardGameListFactory.getBoardGameList(boardGameList, BoardGameListFactory.BoardGameListType.Full);
+        fullBoardGameListDto.setName("Favorite 2");
+
+        BoardGameList editedBoardGameList = new BoardGameList(boardGameList.getId(), fullBoardGameListDto.getName(), boardGameList.getDescription(), BoardGameListActiveState.instance(), null, null);
+
+        when(boardGameListService.editBoardGameList(any(), any()))
+                .thenReturn(editedBoardGameList);
+
+        BoardGameList boardGameListAfterEdit = boardGameListFacade.editBoardGameList(boardGameList, fullBoardGameListDto);
+        assertThat(boardGameListAfterEdit.getName()).isEqualTo(fullBoardGameListDto.getName());
     }
 
     @Test

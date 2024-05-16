@@ -93,6 +93,27 @@ public class CommandTest {
 
     }
 
+    @Test
+    public void givenCommandType_whenCreateAddBoardGameToBoardGameListsCommand_returnCheckBoardGameListCommand() {
+        BoardGameListCommand.CommandType type = BoardGameListCommand.CommandType.ADD_BOARD_GAME_TO_LISTS;
+
+        List<BoardGameList> boardGameLists = List.of(getBoardGameList());
+        Category cooperative = new Category(2L, "Cooperative", new ArrayList<>());
+        BoardGame descent = new BoardGame(3L, "Descent: Legends of the dark", AgeRestriction.PLUS_12, "", "FFG", 1, 4, cooperative, new HashSet<>(), null, null);
+
+        List<BoardGameList> modified = List.copyOf(boardGameLists);
+        modified.forEach(boardGameList -> boardGameList.getBoardGames().add(descent));
+        when(boardGameListRepository.saveAll(any()))
+                .thenReturn(modified);
+
+        BoardGameListCommand boardGameListCommand = boardGameListCommandFactory.create(type, boardGameLists, descent);
+        List<BoardGameList> boardGameListFromCommand = (List<BoardGameList>) boardGameListCommand.execute();
+        assertThat(boardGameListCommand).isInstanceOf(AddBoardGameToBoardGameLists.class);
+        for(BoardGameList boardGameList: boardGameListFromCommand) {
+            assertThat(boardGameList.getBoardGames()).contains(descent);
+        }
+    }
+
     public BoardGameList getBoardGameList() {
         Category cardGame = new Category(1L, "Card Game", new ArrayList<>());
         Category cooperative = new Category(2L, "Cooperative", new ArrayList<>());
