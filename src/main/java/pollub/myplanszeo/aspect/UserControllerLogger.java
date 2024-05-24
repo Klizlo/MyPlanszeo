@@ -13,8 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import pollub.myplanszeo.config.security.CustomUserDetails;
-import pollub.myplanszeo.model.User;
 
 @Slf4j
 @Aspect

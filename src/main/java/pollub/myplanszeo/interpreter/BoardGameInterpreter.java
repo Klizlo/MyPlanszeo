@@ -1,7 +1,6 @@
 package pollub.myplanszeo.interpreter;
 
 import lombok.AllArgsConstructor;
-import pollub.myplanszeo.functional.BoardGameFilter;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.ArrayList;

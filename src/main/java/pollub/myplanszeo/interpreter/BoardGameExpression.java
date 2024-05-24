@@ -1,6 +1,5 @@
 package pollub.myplanszeo.interpreter;
 
-import pollub.myplanszeo.functional.BoardGameFilter;
 import pollub.myplanszeo.model.BoardGame;
 
 import java.util.List;

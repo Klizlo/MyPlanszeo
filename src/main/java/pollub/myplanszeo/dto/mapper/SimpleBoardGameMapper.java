@@ -9,7 +9,7 @@ import java.util.List;
 //Tydzień 6, Wzorzec Strategy 1
 //Klasa implementuje interfejs BoardGameMapper i ma za zadanie zmapować obiekty klasy
 //BoardGame na obiekty klasy BoardGameDto
-public class SimpleBoardGameMapper implements BoardGameMapper{
+public class SimpleBoardGameMapper implements BoardGameMapper {
     @Override
     public List<BoardGameDto> mapToDtos(List<BoardGame> boardGames) {
         return boardGames.stream()
